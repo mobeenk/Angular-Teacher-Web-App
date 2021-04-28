@@ -37,6 +37,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -65,9 +66,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ChangePasswordComponent,
     ContactUsComponent,
     FooterComponent
+
  
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
