@@ -22,12 +22,20 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<MemberDto> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string username, bool isCurrentUser)
         {
-            return await _context.Users
+            // Ignore Query filter for the current user (GetMemberAsync) so the current user still sees
+            // their unapproved photos
+            var query = _context.Users
                 .Where(x => x.UserName == username)
                 .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                .SingleOrDefaultAsync();
+                .AsQueryable();
+            ;
+
+            if (isCurrentUser)
+                query = query.IgnoreQueryFilters();
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
@@ -47,9 +55,9 @@ namespace API.Data
                 "created" => query.OrderByDescending(u => u.Created),
                 _ => query.OrderByDescending(u => u.LastActive)
             };
-            
+
             return await PagedList<MemberDto>.CreateAsync(query.ProjectTo<MemberDto>(_mapper
-                .ConfigurationProvider).AsNoTracking(), 
+                .ConfigurationProvider).AsNoTracking(),
                     userParams.PageNumber, userParams.PageSize);
         }
 
@@ -82,6 +90,15 @@ namespace API.Data
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public async Task<AppUser> GetUserByPhotoId(int photoId)
+        {
+            return await _context.Users
+            .Include(p => p.Photos)
+            .IgnoreQueryFilters()
+            .Where(p => p.Photos.Any(p => p.Id == photoId))
+            .FirstOrDefaultAsync();
         }
     }
 }

@@ -50,7 +50,10 @@ namespace API.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await _unitOfWork.UserRepository.GetMemberAsync(username);
+            var currentUsername = User.GetUsername();
+            return await _unitOfWork.UserRepository.GetMemberAsync(username, isCurrentUser: currentUsername == username );
+            // before photoapproval
+           // return await _unitOfWork.UserRepository.GetMemberAsync(username);
         }
 
         [HttpPut]
@@ -82,7 +85,9 @@ namespace API.Controllers
                 Url = result.SecureUrl.AbsoluteUri,
                 PublicId = result.PublicId
             };
-
+            //  Remove the logic in the UsersController when adding a photo to automatically set a photo
+            // to main if they do not have a main photo
+            
             if (user.Photos.Count == 0)
             {
                 photo.IsMain = true;
