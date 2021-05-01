@@ -70,7 +70,7 @@ export class MembersService {
     }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
-
+// member is body element passed in postman
   updateMember(member: Member) {
     return this.http.put(this.baseUrl + 'users', member).pipe(
       map(() => {
@@ -98,5 +98,14 @@ export class MembersService {
     return getPaginatedResult<Partial<Member[]>>(this.baseUrl + 'likes', params, this.http);
   }
 
+  changeUserPassword(member: Member) {
+    return this.http.put(this.baseUrl + 'users/change-password', member).pipe(
+      map(() => {
+        const index = this.members.indexOf(member);
+        this.members[index] = member;
+      })
+    )
+   // return this.http.put(this.baseUrl + 'users/change-password' , {});
+  }
   
 }

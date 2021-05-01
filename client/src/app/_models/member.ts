@@ -15,5 +15,8 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
+    // to map change password fields from form put request
+    passwordO: string;
+    passwordN: string;
   }
   
