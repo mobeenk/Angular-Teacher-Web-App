@@ -59,6 +59,7 @@ export class ResetEmailformComponent implements OnInit {
     })
   }
   cancel(){
-    this.router.navigateByUrl('/members');
+    this.router.navigateByUrl('/');
+    console.log('ehd')
   }
 }
