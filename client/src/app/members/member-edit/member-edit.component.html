@@ -4,9 +4,9 @@
     </div>
     <div class="row" *ngIf="member">
 
-    <div class="col-8">
-        <div class="alert alert-info" *ngIf="editForm.dirty">
-            <strong>Information: </strong> You have made changes.  Any unsaved changes will be lost
+    <div class="col-12">
+        <div class="alert alert-info text-right" *ngIf="editForm.dirty">
+            <strong>تحذير: </strong> لغد قمت بتعديل بعض البيانات, الرجاء التأكد قبل الحفظ
         </div>
     </div>
 
@@ -15,19 +15,34 @@
         <tabset class="member-tabset text-right">
             <tab heading='About {{member.knownAs}}'>
                 <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
+
+                    <h4 class="mt-2">Location Details: </h4>
+                    <div class="form-group row">
+                        <div class="form-group col-md-4">
+                            <label for="city">المدينة: </label>
+                            <input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="city">الدولة: </label>
+                            <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="form-check-label" for="email">البريد الإلكتروني: </label>
+                            <input [(ngModel)]="member.email" type="text" name="email" class="form-control mt-2">
+                        </div>
+                    </div>
+
                     <h4>Description</h4>
                     <textarea class="form-control" [(ngModel)]="member.introduction" name="introduction" rows="6"></textarea>
                     <h4 class="mt-2">Looking for</h4>
                     <textarea class="form-control" [(ngModel)]="member.lookingFor" name="lookingFor" rows="6"></textarea>
                     <h4 class="mt-2">Interests</h4>
                     <textarea class="form-control" [(ngModel)]="member.interests" name="interests" rows="6"></textarea>
-                    <h4 class="mt-2">Location Details: </h4>
-                    <div class="form-inline">
-                        <label for="city">المدينة: </label>
-                        <input [(ngModel)]="member.city" type="text" name="city" class="form-control mx-2">
-                        <label for="city">Country: </label>
-                        <input [(ngModel)]="member.country" type="text" name="country" class="form-control mx-2">
-                    </div>
+                  
+              
+                  
+            
+            
                 </form>
                
             </tab>

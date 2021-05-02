@@ -37,6 +37,9 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetEmailformComponent } from './reset-emailform/reset-emailform.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +68,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ConfirmDialogComponent,
     ChangePasswordComponent,
     ContactUsComponent,
-    FooterComponent
+    FooterComponent,
+    ResetPasswordComponent,
+    ResetEmailformComponent
 
  
   ],

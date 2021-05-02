@@ -33,7 +33,7 @@ namespace API.Controllers
             _photoService = photoService;
             _mapper = mapper;
         }
-
+ 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
     {
@@ -45,7 +45,8 @@ namespace API.Controllers
 
         var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
-        Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
+        Response.AddPaginationHeader(
+            users.CurrentPage, users.PageSize,
             users.TotalCount, users.TotalPages);
 
         return Ok(users);
@@ -142,7 +143,7 @@ namespace API.Controllers
 
         var result = await _userManager.ChangePasswordAsync(user,  changePassword.PasswordO  ,changePassword.PasswordN);
 
-
+   
         if (!result.Succeeded)
             return BadRequest("فشل تغيير كلمة المرور, تأكد من تطابق البيانات");
 

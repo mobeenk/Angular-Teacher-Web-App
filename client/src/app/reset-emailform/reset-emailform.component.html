@@ -1,27 +1,23 @@
 <form 
-  [formGroup]="changePassForm"
-  (ngSubmit)="changePassForm.valid && changeMemberPassword()"
+  [formGroup]="emailReset"
+  (ngSubmit)="emailReset.valid && forgotPasswordMailreset()"
   autocomplete="off"
 >
   <h2 class="text-center text-primary">تغيير كلمة المرور</h2>
   <hr />
 
   <app-text-input 
-    [formControl]="changePassForm.controls['passwordo']"
-    [label]="'كلمة المرور الحالية'"
-    [type]="'password'"
+    [formControl]="emailReset.controls['email']"
+    [label]="'example@test.com'"
+    [type]="'text'"
   >
   </app-text-input>
-  <app-text-input
-    [formControl]="changePassForm.controls['passwordn']"
-    [label]="'كلمة المرور الجديدة'"
-    [type]="'password'"
-  >
-  </app-text-input>
+ 
+
 
   <div class="form-group text-center">
     <button
-      [disabled]="!changePassForm.valid"
+      [disabled]="!emailReset.valid"
       class="btn btn-success mr-2"
       type="submit"
     >

@@ -107,5 +107,15 @@ export class MembersService {
     )
    // return this.http.put(this.baseUrl + 'users/change-password' , {});
   }
+
+
+  
+  forgotPasswordMail(email: any) {
+    return this.http.post
+    (this.baseUrl + 'account/forgot-password-mail',  email)
+    .pipe()
+    // this.http.post(this.baseUrl + 'account/forgot-password-mail' + member, {});
+   // return this.http.put(this.baseUrl + 'users/change-password' , {});
+  }
   
 }

@@ -19,5 +19,7 @@ namespace API.DTOs
         public string City { get; set; }
         public string Country { get; set; }
         public ICollection<PhotoDto> Photos { get; set; }
+        // to return email from reposence in UsersController GET users
+        public string Email { get; set; }
     }
 }

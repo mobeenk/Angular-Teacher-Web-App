@@ -18,5 +18,7 @@ export interface Member {
     // to map change password fields from form put request
     passwordO: string;
     passwordN: string;
+// for email map
+    email: string;
   }
   

@@ -16,6 +16,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetEmailformComponent } from './reset-emailform/reset-emailform.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -35,6 +36,7 @@ const routes: Routes = [
   },
   {path: 'errors', component: TestErrorsComponent},
   {path: 'contactus', component: ContactUsComponent},
+  {path: 'reset-emailpassword', component: ResetEmailformComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: 'server-error', component: ServerErrorComponent},
   {path: '**', component: NotFoundComponent, pathMatch: 'full'},
