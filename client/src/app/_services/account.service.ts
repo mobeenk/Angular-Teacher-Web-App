@@ -5,6 +5,7 @@ import { User } from '../_models/user';
 import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PresenceService } from './presence.service';
+import { resetUser } from '../_models/resetUser';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
-
+  
   constructor(private http: HttpClient, private presence: PresenceService) { }
 
   login(model: any) {
@@ -29,6 +30,7 @@ export class AccountService {
   }
 
   register(model: any) {
+    
     return this.http.post(this.baseUrl + 'account/register', model).pipe(
       map((user: User) => {
         if (user) {
@@ -56,4 +58,14 @@ export class AccountService {
   getDecodedToken(token) {
     return JSON.parse(atob(token.split('.')[1]));
   }
+
+  resetPasswordService(resetObject: resetUser) {
+    return this.http.post(this.baseUrl + 'account/reset-password', resetObject).pipe(
+      map((response: resetUser) => {
+        const user = response;
+      })
+    )
+
+  }
+
 }

@@ -17,24 +17,25 @@ export class ResetEmailformComponent implements OnInit {
   validationErrors: string[] = [];
   member: Member;
   user: User;
+  submitted: boolean;
   // @ViewChild('changePasswordForm') changePasswordForm: NgForm;
 
 
   constructor(private accountService: AccountService,
-     private memberService: MembersService, 
-    private toastr: ToastrService,private fb: FormBuilder
-    , private router: Router )
-     { 
-      this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    private memberService: MembersService,
+    private toastr: ToastrService, private fb: FormBuilder
+    , private router: Router) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    this.submitted = false;
   }
 
   intitializeForm() {
     this.emailReset = this.fb.group({
       email: ['',
-       [Validators.required, Validators.email
+        [Validators.required, Validators.email
 
-        ] 
-       ]
+        ]
+      ]
 
     })
   }
@@ -44,7 +45,7 @@ export class ResetEmailformComponent implements OnInit {
     // this.loadMember();
   }
 
-  
+
   // loadMember() {
   //   this.memberService.getMember(this.user.username).subscribe(member => {
   //     this.member = member;
@@ -52,14 +53,21 @@ export class ResetEmailformComponent implements OnInit {
   // }
   forgotPasswordMailreset() {
     this.memberService.forgotPasswordMail(this.emailReset.value).subscribe(() => {
-    // this.memberService.changeUserPassword(this.member).subscribe(() => {
-      this.toastr.success('تم تغيير كلمة المرور بنجاح');
+      // this.memberService.changeUserPassword(this.member).subscribe(() => {
+
+      this.toastr.success('تم إرسال البريد الالكتروني لإعادة الضبط ');
       // this.changePasswordForm.reset(this.member);
-      this.router.navigateByUrl('/members');
+      this.submitted = true;
+
+      // this.router.navigateByUrl('/');
     })
   }
-  cancel(){
+
+  cancel() {
     this.router.navigateByUrl('/');
     console.log('ehd')
+  }
+  flag() {
+    this.submitted = true;
   }
 }

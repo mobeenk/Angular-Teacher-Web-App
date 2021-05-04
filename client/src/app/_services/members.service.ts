@@ -110,12 +110,20 @@ export class MembersService {
 
 
   
-  forgotPasswordMail(email: any) {
+  forgotPasswordMail(email: string) {
     return this.http.post
-    (this.baseUrl + 'account/forgot-password-mail',  email)
+    (this.baseUrl + 'account/forgot-password-mail',
+      email
+    )
     .pipe()
     // this.http.post(this.baseUrl + 'account/forgot-password-mail' + member, {});
    // return this.http.put(this.baseUrl + 'users/change-password' , {});
   }
+
+
+    
+
+
+
   
 }

@@ -114,8 +114,7 @@ namespace API.Controllers
     {
         var user = await _userManager.Users.SingleOrDefaultAsync
         (x => x.Email == forgotPasswordDto.Email);
-        // Find the user by email
-        // var user = await _userManager.FindByEmailAsync(forgotPasswordDto.Email);
+
         if (user == null)
             return BadRequest("User doesnt exists");
 
@@ -137,13 +136,36 @@ namespace API.Controllers
              "<h1>Follow the instructions to reset your password</h1>" +
                 $"<p>To reset your password <a href='{url}'>Click here</a></p>");
 
-            return Ok("Sent Email");
+            return Ok();
         }
 
         // To avoid account enumeration and brute force attacks, don't
         // reveal that the user does not exist or is not confirmed
         return BadRequest("not found");
 
+
+    }
+    [HttpPost("reset-password")]
+    public async Task<IActionResult> ResetPasswordAsync(ResetPasswordDto resetPasswordDto)
+    {
+        var user = await _userManager.Users.SingleOrDefaultAsync
+        (x => x.Email == resetPasswordDto.Email);
+
+        if (user == null)
+            return BadRequest("User doesnt exists");
+
+        if(resetPasswordDto.NewPassword != resetPasswordDto.ConfirmPassword){
+            return BadRequest("Password doesnt Match");
+        }
+        var decodedToken = WebEncoders.Base64UrlDecode(resetPasswordDto.Token);
+        string normalToken = Encoding.UTF8.GetString(decodedToken);
+
+        var result = await _userManager.ResetPasswordAsync(user, normalToken,resetPasswordDto.NewPassword);
+
+        if(result.Succeeded)
+            return Ok();
+
+        return BadRequest("Unexpected Error");
 
     }
 }
