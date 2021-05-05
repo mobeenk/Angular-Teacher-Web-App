@@ -39,7 +39,7 @@ export class MembersService {
     this.userParams = new UserParams(this.user);
     return this.userParams;
   }
-
+  // service to get the members page
   getMembers(userParams: UserParams) {
     var response = this.memberCache.get(Object.values(userParams).join('-'));
     if (response) {
@@ -70,7 +70,7 @@ export class MembersService {
     }
     return this.http.get<Member>(this.baseUrl + 'users/' + username);
   }
-// member is body element passed in postman
+  // member is body element passed in postman
   updateMember(member: Member) {
     return this.http.put(this.baseUrl + 'users', member).pipe(
       map(() => {
@@ -105,25 +105,25 @@ export class MembersService {
         this.members[index] = member;
       })
     )
-   // return this.http.put(this.baseUrl + 'users/change-password' , {});
+    // return this.http.put(this.baseUrl + 'users/change-password' , {});
   }
 
 
-  
+
   forgotPasswordMail(email: string) {
     return this.http.post
-    (this.baseUrl + 'account/forgot-password-mail',
-      email
-    )
-    .pipe()
+      (this.baseUrl + 'account/forgot-password-mail',
+        email
+      )
+      .pipe()
     // this.http.post(this.baseUrl + 'account/forgot-password-mail' + member, {});
-   // return this.http.put(this.baseUrl + 'users/change-password' , {});
+    // return this.http.put(this.baseUrl + 'users/change-password' , {});
   }
 
 
-    
 
 
 
-  
+
+
 }
