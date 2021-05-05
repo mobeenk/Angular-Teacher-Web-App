@@ -68,11 +68,11 @@ namespace API.Controllers
             Gender = user.Gender
         };
     }
-    public async void SendMail()
-    {
-        await _mailService.SendEmailAsync
-        ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
-    }
+    // public async void SendMail()
+    // {
+    //     await _mailService.SendEmailAsync
+    //     ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
+    // }
 
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
@@ -165,7 +165,7 @@ namespace API.Controllers
         if(result.Succeeded)
             return Ok();
 
-        return BadRequest("Unexpected Error");
+        return BadRequest("يجب أن تكون كلمة المرور 8 حروف على الأقل تحتوي على حرف كبير وارقام ورمز");
 
     }
 }

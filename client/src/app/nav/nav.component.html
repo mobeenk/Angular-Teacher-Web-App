@@ -18,7 +18,9 @@
           >تعديل الملف الشخصي</a
         >
         <a routerLink="/messages" class="dropdown-item">الرسائل</a>
-        <a routerLink="/change-password" class="dropdown-item"
+        <a 
+       
+        routerLink="/change-password" class="dropdown-item"
           >تغيير كلمة المرور</a
         >
         <div class="dropdown-divider"></div>
@@ -35,10 +37,19 @@
       (ngSubmit)="login()"
       autocomplete="off"
     >
-    <a routerLink="/reset-emailpassword" class="btn btn-link btn-sm text-white" type="">نسيت كملة المرور</a>
+      <a
+      tabindex="1"
+        routerLink="/reset-emailpassword"
+        class="btn btn-link btn-sm text-white"
+        type=""
+        >نسيت كملة المرور</a
+      >
 
-      <button class="btn btn-success my-2 mr-2 my-sm-0" type="submit">دخول</button>
+      <button class="btn btn-success my-2 mr-2 my-sm-0" type="submit">
+        دخول
+      </button>
       <input
+        tabindex="3"
         name="password"
         [(ngModel)]="model.password"
         class="form-control mr-sm-2 text-right"
@@ -46,13 +57,13 @@
         placeholder="كلمة المرور"
       />
       <input
+        tabindex="2"
         name="username"
         [(ngModel)]="model.username"
-        class="form-control mr-sm-2  text-right"
+        class="form-control mr-sm-2 text-right"
         type="text"
         placeholder="اسم المستحدم"
       />
-      
     </form>
     <!-- end -->
 
@@ -89,7 +100,7 @@
                 <a class="nav-link" routerLink='/errors'routerLinkActive='active' >الأخطاء</a>
             </li> -->
     </ul>
-    <a class="navbar-brand" routerLink="/" routerLinkActive="active"
+    <a tabindex="-7" class="navbar-brand" routerLink="/" routerLinkActive="active"
       >مدرسي الخصوصي</a
     >
   </div>

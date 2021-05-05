@@ -56,7 +56,7 @@ export class ResetPasswordComponent implements OnInit {
         this.toastr.show('تم تعيين كلمة مرور جديدة بنجاح')
         this.router.navigateByUrl('/');
       }, error => {
-        this.toastr = error;
+        this.toastr.show('خطأ الرجاء التأكد')
       })
   }
 

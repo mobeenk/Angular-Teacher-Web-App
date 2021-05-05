@@ -1,21 +1,28 @@
 
 
-<div  *ngIf="!submitted"> 
+<div   *ngIf="!submitted"> 
 
   <form 
   [formGroup]="emailReset"
   (ngSubmit)="emailReset.valid && forgotPasswordMailreset()"
   autocomplete="off"
 >
-  <h2 class="text-right text-primary"> أدخل البريد الالكتروني لإعادة الضبط </h2>
-  <hr />
+  <h2 class="text-center text-primary"> أدخل البريد الالكتروني لإعادة الضبط </h2>
 
-  <app-text-input 
+<div class="row justify-content-center">
+  <div class="col-sm-6">
+    <hr />
+    <app-text-input 
     [formControl]="emailReset.controls['email']"
     [label]="'example@test.com'"
     [type]="'text'"
+    [class]= "'text-center'"
   >
   </app-text-input>
+  </div>
+
+</div>
+
  
 
   <div class="form-group text-center">
@@ -26,9 +33,9 @@
       type="submit"
 
     >
-      Register
+      إرسال
     </button>
-    <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
+    <button class="btn btn-default mr-2" (click)="cancel()" type="button">إلفاء</button>
   </div>
 </form>
 </div>
