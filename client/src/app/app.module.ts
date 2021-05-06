@@ -39,6 +39,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetEmailformComponent } from './reset-emailform/reset-emailform.component';
+import { GuestsComponent } from './guests-components/guests/guests.component';
+import { GuestCardComponent } from './guests-components/guest-card/guest-card.component';
+import { GuestDetailComponent } from './guests-components/guest-detail/guest-detail.component';
+
 
 
 @NgModule({
@@ -70,7 +74,10 @@ import { ResetEmailformComponent } from './reset-emailform/reset-emailform.compo
     ContactUsComponent,
     FooterComponent,
     ResetPasswordComponent,
-    ResetEmailformComponent
+    ResetEmailformComponent,
+    GuestsComponent,
+    GuestCardComponent,
+    GuestDetailComponent
 
  
   ],

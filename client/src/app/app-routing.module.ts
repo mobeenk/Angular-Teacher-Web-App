@@ -18,6 +18,10 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetEmailformComponent } from './reset-emailform/reset-emailform.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { GuestsComponent } from './guests-components/guests/guests.component';
+import { GuestCardComponent } from './guests-components/guest-card/guest-card.component';
+import { GuestDetailComponent } from './guests-components/guest-detail/guest-detail.component';
+import { GuestDetailedResolver } from './_resolvers/guest-detailed.resolver';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,7 +30,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      // {path: 'members', component: MemberListComponent},
+      {path: 'members', component: MemberListComponent},
       {path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver}},
       {path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path: 'lists', component: ListsComponent},
@@ -35,7 +39,9 @@ const routes: Routes = [
       {path: 'change-password', component: ChangePasswordComponent},
     ]
   },
-  {path: 'members', component: MemberListComponent},
+
+  {path: 'guests', component: GuestsComponent},
+  {path: 'guests/:username', component: GuestDetailComponent , resolve: {member: GuestDetailedResolver} }, //
   {path: 'errors', component: TestErrorsComponent},
   {path: 'contactus', component: ContactUsComponent},
   {path: 'reset-emailpassword', component: ResetEmailformComponent},
