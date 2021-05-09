@@ -1,8 +1,5 @@
 <div class="row">
-
-
     <div class="col-8" >
-
 
     <tabset dir="rtl"  class="member-tabset text-right" #memberTabs>
         <tab  heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)" style="float: right;">
@@ -25,9 +22,7 @@
     </tabset>
 
 
-
-
-
+<!-- profile on right -->
 
     </div>
     <div class="col-4">
@@ -39,30 +34,40 @@
                     <i class="fa fa-user-circle text-success"></i> Online now
                 </div>
                 <div>
-                    <strong>Location:</strong>
-                    <p>{{member.city}}, {{member.country}}</p>
+                    <strong>الدولة</strong>
+                    <p> {{member.country}}</p>
                 </div>
                 <div>
-                    <strong>Age:</strong>
-                    <p>{{member.age}}</p>
+                    <strong>المدينة</strong>
+                    <p>{{member.city}}</p>
                 </div>
                 <div>
-                    <strong>Last Active:</strong>
+                    <strong>العمر</strong>
+                    <p>{{isPressed == true ? member.age : '************'  }}</p>
+                    <div class="img__description" *ngIf="isPressed" style="margin-bottom: 20px;">
+                        <a href="http://api.whatsapp.com/send?phone={{member.age}}"  target="_blank"  >
+                            <img src='./assets/icons8-whatsapp.gif'  width="50"  height="50" title="إرسال عبر واتساب"/>
+                        </a>
+                    </div>
+                  
+                </div>
+                <div>
+                    <strong>آخر ظهور</strong>
                     <p>{{member.lastActive | timeago}}</p>
                 </div>
                 <div>
-                    <strong>Member since:</strong>
+                    <strong>عضو منذ</strong>
                     <p>{{member.created | date: 'dd MMM yyyy'}}</p>
                 </div>
-                <div>
+                <!-- <div>
                     <strong>Email:</strong>
                     <p>{{member.email}}</p>
-                </div>
+                </div> -->
             </div>
             <div class="card-footer">
                 <div class="btn-group d-flex">
                     <!-- <button class="btn btn-primary">Like</button> -->
-                    <button class="btn btn-success">إظهار الرقم</button>
+                    <button  class="btn btn-success"  (click)="revealNumber()">إظهار الرقم</button>
                 </div>
             </div>
         </div>

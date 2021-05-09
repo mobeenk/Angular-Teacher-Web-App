@@ -23,6 +23,9 @@ import { GuestCardComponent } from './guests-components/guest-card/guest-card.co
 import { GuestDetailComponent } from './guests-components/guest-detail/guest-detail.component';
 import { GuestDetailedResolver } from './_resolvers/guest-detailed.resolver';
 
+import {HttpClientModule} from '@angular/common/http';
+
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {

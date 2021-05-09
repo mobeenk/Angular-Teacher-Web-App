@@ -87,8 +87,8 @@ namespace API.Controllers
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
         if (result.Succeeded)
         {
-            await _mailService.SendEmailAsync
-              ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
+            // await _mailService.SendEmailAsync
+            //   ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
         }
         if (!result.Succeeded)
             return Unauthorized();

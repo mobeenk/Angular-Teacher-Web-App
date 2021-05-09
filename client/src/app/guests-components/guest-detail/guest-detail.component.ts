@@ -17,7 +17,7 @@ import { take } from 'rxjs/operators';
 })
 export class GuestDetailComponent implements OnInit {
 
-  @ViewChild('memberTabs', {static: true}) memberTabs: TabsetComponent;
+  @ViewChild('memberTabs', { static: true }) memberTabs: TabsetComponent;
   member: Member;
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -25,14 +25,18 @@ export class GuestDetailComponent implements OnInit {
   messages: Message[] = [];
   user: User;
 
-  constructor(public presence: PresenceService, private route: ActivatedRoute, 
+  isPressed: boolean;
+
+  constructor(public presence: PresenceService, private route: ActivatedRoute,
     private messageService: MessageService, private accountService: AccountService,
-    private router: Router) { 
-      this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
-      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    }
+    private router: Router) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit(): void {
+    // the response coming from this request
+    //  https://localhost:5001/api/guests/luz
     this.route.data.subscribe(data => {
       this.member = data.member;
     })
@@ -88,5 +92,9 @@ export class GuestDetailComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();
+  }
+
+  revealNumber() {
+    this.isPressed = true
   }
 }

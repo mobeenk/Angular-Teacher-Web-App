@@ -26,6 +26,11 @@ namespace API.Entities
         public ICollection<Message> MessagesReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
 
+
+//  phonenumber & email already exists in Micorsoft Identity
+        public string Major { get; set; }
+        public bool IsVerified { get; set; } = false;
+
         
     
 

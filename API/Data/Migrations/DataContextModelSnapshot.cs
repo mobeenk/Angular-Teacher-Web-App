@@ -84,6 +84,9 @@ namespace API.Data.Migrations
                     b.Property<string>("Introduction")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("KnownAs")
                         .HasColumnType("TEXT");
 
@@ -97,6 +100,9 @@ namespace API.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LookingFor")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Major")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedEmail")

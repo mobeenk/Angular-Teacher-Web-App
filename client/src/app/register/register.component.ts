@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -11,9 +12,12 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   @Output() cancelRegister = new EventEmitter();
+
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
+
+  @Output() selectedCountry = new EventEmitter<string>();
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
     private fb: FormBuilder, private router: Router) { }
@@ -26,6 +30,14 @@ export class RegisterComponent implements OnInit {
 
   intitializeForm() {
     this.registerForm = this.fb.group({
+  //     country: [
+  //       {
+  //       name: 'Deutschland',
+  //       alpha2Code: 'DE',
+  //       alpha3Code: 'DEU',
+  //       numericCode: '276'
+  //     } ,Validators.required
+  // ],
       gender: ['male'],
       username: ['', Validators.required],
       knownAs: ['', Validators.required],
@@ -57,5 +69,8 @@ export class RegisterComponent implements OnInit {
   cancel() {
     this.cancelRegister.emit(false);
   }
+  // onCountrySelected(value: string){
+  //   console.log(value)
+  // }
 
 }

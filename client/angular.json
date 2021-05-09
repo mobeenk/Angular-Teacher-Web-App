@@ -21,9 +21,15 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/svg-country-flags/svg",
+                "output": "src/assets/svg-country-flags/svg"
+              }
             ],
             "styles": [
+        
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "./node_modules/bootswatch/dist/spacelab/bootstrap.css",
@@ -96,6 +102,7 @@
               "src/assets"
             ],
             "styles": [
+        
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "src/styles.css"
