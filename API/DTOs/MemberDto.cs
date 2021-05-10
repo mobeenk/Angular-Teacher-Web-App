@@ -21,5 +21,8 @@ namespace API.DTOs
         public ICollection<PhotoDto> Photos { get; set; }
         // to return email from reposence in UsersController GET users
         public string Email { get; set; }
+
+        public string PhoneNumber { get; set; }
+        public bool IsVerified { get; set; }
     }
 }

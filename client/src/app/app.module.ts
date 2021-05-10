@@ -42,7 +42,7 @@ import { ResetEmailformComponent } from './reset-emailform/reset-emailform.compo
 import { GuestsComponent } from './guests-components/guests/guests.component';
 import { GuestCardComponent } from './guests-components/guest-card/guest-card.component';
 import { GuestDetailComponent } from './guests-components/guest-detail/guest-detail.component';
-
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -79,6 +79,7 @@ import { GuestDetailComponent } from './guests-components/guest-detail/guest-det
     GuestsComponent,
     GuestCardComponent,
     GuestDetailComponent
+    
 
  
   ],
@@ -91,7 +92,8 @@ import { GuestDetailComponent } from './guests-components/guest-detail/guest-det
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

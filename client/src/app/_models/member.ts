@@ -20,5 +20,7 @@ export interface Member {
     passwordN: string;
 // for email map
     email: string;
+    phoneNumber: string;
+    isVerified: boolean;
   }
   

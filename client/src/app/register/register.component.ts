@@ -11,13 +11,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+
   @Output() cancelRegister = new EventEmitter();
 
   registerForm: FormGroup;
   maxDate: Date;
   validationErrors: string[] = [];
-
-  @Output() selectedCountry = new EventEmitter<string>();
+// tp enable city for a counties
+  countryList: Array<any> = [
+    { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة','نجران'] },
+    { name: 'أمريكا الشمالية', cities: ['الولايات المتحدة الأمريكية', 'كندا','المكسيك'] },
+    { name: 'أمريكا الجنوبية', cities:['البرازيل','أخرى'] },
+    { name: 'أوروبا', cities: ['السويد','ألمانيا', 'فرنسا', 'إسبانيا','أخرى'] },
+    { name: 'استراليا', cities: ['سيدني','أخرى'] },
+  ];
+  cities: Array<any>;
 
   constructor(private accountService: AccountService, private toastr: ToastrService, 
     private fb: FormBuilder, private router: Router) { }
@@ -30,20 +39,15 @@ export class RegisterComponent implements OnInit {
 
   intitializeForm() {
     this.registerForm = this.fb.group({
-  //     country: [
-  //       {
-  //       name: 'Deutschland',
-  //       alpha2Code: 'DE',
-  //       alpha3Code: 'DEU',
-  //       numericCode: '276'
-  //     } ,Validators.required
-  // ],
+
       gender: ['male'],
       username: ['', Validators.required],
       knownAs: ['', Validators.required],
       dateOfBirth: ['', Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
+      email:  ['', [Validators.required, Validators.email]],
+      phoneNumber:  ['',[Validators.required ,  Validators.pattern("^[0-9]*$"), Validators.minLength(8)] ],
       password: ['', [Validators.required, 
         Validators.minLength(4), Validators.maxLength(8)]],
       confirmPassword: ['', [Validators.required, this.matchValues('password')]]
@@ -69,8 +73,10 @@ export class RegisterComponent implements OnInit {
   cancel() {
     this.cancelRegister.emit(false);
   }
-  // onCountrySelected(value: string){
-  //   console.log(value)
-  // }
+
+
+  changeCountry(count) {
+    this.cities = this.countryList.find(con => con.name == count).cities;
+  }
 
 }
