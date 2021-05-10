@@ -16,6 +16,34 @@ export class MemberEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
   member: Member;
   user: User;
+
+
+  countryList: Array<any> = [
+    { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة','نجران'] },
+    { name: 'أمريكا', cities: ['واشنطن', 'نيويورك','أخرى'] },
+    { name: 'كندا', cities: [ 'تورونتو','أخرى'] },
+    { name: 'أمريكا الجنوبية', cities:['البرازيل','أخرى'] },
+    { name: 'أوروبا', cities: ['السويد','ألمانيا', 'فرنسا', 'إسبانيا','أخرى'] },
+    { name: 'استراليا', cities: ['سيدني','أخرى'] },
+    { name: 'مصر', cities: ['القاهرة','أخرى'] },
+    { name: 'الكويت', cities: ['الكويت','أخرى'] },
+    { name: 'الإمارات', cities: ['الشارقة', 'دبي', 'أبو ظبي','أخرى'] },
+    { name: 'البحرين', cities: [ 'المنامة', 'أخرى'] },
+    { name: 'عمان', cities: [ 'مسقط', 'أخرى'] },
+    { name: 'اليمن', cities: [ 'صنعاء', 'أخرى'] },
+    { name: 'سوريا', cities: [ 'حلب', 'دمشق' ,'حمص', 'حماة' ,'دير الزور', 'أخرى'] },
+    { name: 'لبنان', cities: ['طرابلس', 'بيروت','أخرى'] },
+    { name: 'الأردن', cities: [ 'عمان', 'أخرى'] },
+    { name: 'العراق', cities: [ 'بغداد', 'أخرى'] },
+    { name: 'فلسطين', cities: [ 'القدس', 'أخرى'] },
+    { name: 'الجزائر', cities: [ 'الجزائر', 'أخرى'] },
+    { name: 'المغرب', cities: [ 'الدار البيضاء', 'أخرى'] },
+    { name: 'السودان', cities: [ 'الخرطوم', 'أخرى'] },
+    { name: 'ليبيا', cities: [  'أخرى'] },
+    { name: 'تونس', cities: [  'أخرى' , 'تونس'] }
+  ];
+  cities: Array<string>;
+
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
       $event.returnValue = true;
@@ -43,4 +71,10 @@ export class MemberEditComponent implements OnInit {
       this.editForm.reset(this.member);
     })
   }
+
+  changeCountry(country) {
+    this.cities = this.countryList.find(con => con.name == country).cities;
+    
+  }
+
 }

@@ -22,25 +22,47 @@
       طالب
     </label>
   </div>
-
+<!-- REAL NAME -->
   <app-text-input
     [formControl]="registerForm.controls['username']"
     [label]="'اسم المستخدم'"
     [class]="'text-right'"
   ></app-text-input>
-
+<!-- NickName -->
   <app-text-input
     [formControl]="registerForm.controls['knownAs']"
     [label]="'الإسم المستعار'"
     [class]="'text-right'"
   ></app-text-input>
-  
+  <!--BIRTH DAY-  -->
   <app-date-input
     [formControl]="registerForm.controls['dateOfBirth']"
     [label]="'تاريخ الميلاد'"
     [maxDate]="maxDate"
   ></app-date-input>
+<!-- MAJOR -->
+  <select
+    class="form-control mb-3"
+    [formControl]="registerForm.controls['major']"
+    dir="rtl"
+  >
+    <option value="" disabled selected>إختر التخصص</option>
+    <option *ngFor="let major of majors">{{ major }}</option>
+  </select>
 
+  <!-- Nationality -->
+
+  <select
+    class="form-control mb-3"
+    [formControl]="registerForm.controls['nationality']"
+    dir="rtl"
+    required
+  >
+    <option value="" disabled selected>إختر الجنسية</option>
+    <option *ngFor="let count of countryList">{{ count.name }}</option>
+  </select>
+
+<!-- Residency Country -->
   <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['country']"
@@ -53,6 +75,9 @@
     <option *ngFor="let count of countryList">{{ count.name }}</option>
   </select>
 
+
+
+<!--  CITY -->
   <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['city']"
@@ -74,7 +99,7 @@
 [label]="'رقم الجوال أو الواتساب'"
 [class]="'text-right'"
 ></app-text-input>
-
+<!-- PASSWORD -->
   <app-text-input
     [formControl]="registerForm.controls['password']"
     [label]="'كلمة المرور'"
@@ -82,13 +107,14 @@
     [class]="'text-right'"
   >
   </app-text-input>
+  <!-- CONFIRM PASSWORD -->
   <app-text-input
     [formControl]="registerForm.controls['confirmPassword']"
     [label]="'تأكيد كلمة المرور'"
     [type]="'password'"
     [class]="'text-right'"
   ></app-text-input>
-
+<!-- ERROR SUMMARY -->
   <div class="row" *ngIf="validationErrors.length > 0">
     <ul class="text-danger">
       <li *ngFor="let error of validationErrors">

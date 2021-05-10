@@ -22,7 +22,8 @@ export interface Member {
     email: string;
     phoneNumber: string;
     isVerified: boolean;
-
+    major: string;
+    nationality: string;
     // countryEn:string;
   }
   

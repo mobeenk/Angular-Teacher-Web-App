@@ -18,10 +18,13 @@ namespace API.DTOs
         [StringLength(8, MinimumLength = 4)]
         public string Password { get; set; }
         [Required]
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
+        [Required]
         public string Major { get; set; } 
+        [Required]
         public string Email { get; set; }
-        // public b MyProperty { get; set; }
-        // public string Nationality { get; set; }
+    
+        [Required]
+        public string Nationality { get; set; }
     }
 }
