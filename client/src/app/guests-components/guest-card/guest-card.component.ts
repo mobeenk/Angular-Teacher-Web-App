@@ -18,6 +18,14 @@ export class GuestCardComponent implements OnInit {
     public presence: PresenceService) { }
 
   ngOnInit(): void {
+    //  let map = new Map<string, string>();
+    //   map.set("السعودية", "sa"); 
+    //   if (member.country == 'السعودية'){
+    //     member.countryEn = map.get('السعودية')
+    //   }
+    //   else{
+    //      member.countryEn = map.get('السعودية')
+    //   }
   }
 
   addLike(member: Member) {

@@ -33,7 +33,7 @@ namespace API.Entities
         // overrrided the attribute on asp identity to match MemberDto due to different datatypes
         public  string  PhoneNumber { get; set; }
 
-        
+        //  public string Nationality { get; set; }
     
 
     }

@@ -22,5 +22,6 @@ namespace API.DTOs
         public string Major { get; set; } 
         public string Email { get; set; }
         // public b MyProperty { get; set; }
+        // public string Nationality { get; set; }
     }
 }

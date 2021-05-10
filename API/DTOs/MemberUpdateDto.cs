@@ -10,7 +10,9 @@ namespace API.DTOs
 
         // Edit profile added Email
         public string Email { get; set; }
-        public int PhoneNumber {get; set ;}
+        public string PhoneNumber {get; set ;}
         public string Major { get; set; }
+        
+        //  public string Nationality { get; set; }
     }
 }
