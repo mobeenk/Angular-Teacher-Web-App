@@ -9,6 +9,7 @@ export class GuestParams {
     orderBy = 'lastActive';
 
     constructor() {
-        this.gender =  'female';
+        this.gender =  'الكل';
     }
+    
 }

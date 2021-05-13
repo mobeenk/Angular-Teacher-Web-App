@@ -18,10 +18,14 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   userParams: UserParams;
   user: User;
-  genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }];
+  genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }, { value: 'الكل', display: 'الكل' }];
+  // control page size menu
+  pageSizeList = [{ value: 5, display: '5' }, { value: 10, display: '10' },{value: 15, display: '15'}];
 
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
+    // this.userParams = new UserParams();
+
   }
 
   ngOnInit(): void {

@@ -69,4 +69,19 @@
         firstText="&laquo;" 
         lastText="&raquo;">
 </pagination>
+
+
+<!-- PAGE SIZE SELECTOR -->
+    <select
+            name="pageSize"
+            style="width: 75px"
+            [(ngModel)]="userParams.pageSize"
+            class="form-control ml-2"
+            (change)="loadMembers()"
+        >
+        <option *ngFor="let pageSize of pageSizeList" [value]="pageSize.value" >
+        {{ pageSize.display }}
+        </option>
+    </select>
+
 </div>

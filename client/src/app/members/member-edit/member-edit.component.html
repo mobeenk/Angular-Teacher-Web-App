@@ -11,7 +11,7 @@
 
   <div dir="rtl" class="col-8">
     <tabset class="member-tabset text-right">
-      <tab heading="About {{ member.knownAs }}">
+      <tab heading="معلومات {{ member.knownAs }}">
         <form #editForm="ngForm" id="editForm" (ngSubmit)="updateMember()">
           <h4 class="mt-2">تعديل البيانات الشخصية</h4>
           <div class="form-group row">
@@ -37,7 +37,7 @@
               </select>
             </div>
 
-            <div class="form-group col-md-2">
+            <div class="form-group col-md-3">
               <label for="city">المدينة </label>
               <select
                 class="form-control"
@@ -52,9 +52,9 @@
               </select>
             </div>
 
-<!-- الجنسية -->
+            <!-- الجنسية -->
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
               <label for="nationality">الجنسية </label>
               <input
                 [(ngModel)]="member.nationality"
@@ -63,8 +63,22 @@
                 class="form-control mx-2"
               />
             </div>
+
+            <!-- MAJOR -->
+            <div class="form-group col-md-3">
+              <label for="major">التخصص </label>
+            <select
+              class="form-control"
+              [(ngModel)]="member.major"
+              dir="rtl"
+              name="major"
+            >
+              <option value="" disabled selected>إختر التخصص</option>
+              <option *ngFor="let major of majors"  value="{{ major }}">{{ major }}</option>
+            </select>
           </div>
 
+          </div>
 
           <div class="form-group row">
             <div class="form-group col-md-6">
@@ -78,23 +92,35 @@
                 class="form-control mt-2"
               />
             </div>
+
+            <div class="form-group col-md-6">
+              <label class="form-check-label" for="phoneNumber">
+                رقم التواصل
+              </label>
+              <input
+                [(ngModel)]="member.phoneNumber"
+                type="text"
+                name="phoneNumber"
+                class="form-control mt-2"
+              />
+            </div>
           </div>
 
-          <h4>Description</h4>
+          <h4>معلومات عني</h4>
           <textarea
             class="form-control"
             [(ngModel)]="member.introduction"
             name="introduction"
             rows="6"
           ></textarea>
-          <h4 class="mt-2">Looking for</h4>
+          <h4 class="mt-2">المواد التي أدرسها</h4>
           <textarea
             class="form-control"
             [(ngModel)]="member.lookingFor"
             name="lookingFor"
             rows="6"
           ></textarea>
-          <h4 class="mt-2">Interests</h4>
+          <h4 class="mt-2">بيانات إضافية</h4>
           <textarea
             class="form-control"
             [(ngModel)]="member.interests"
@@ -103,12 +129,12 @@
           ></textarea>
         </form>
       </tab>
-      <tab heading="Edit Photos">
+      <tab heading="إضافة الصور الشخصية والشهادات">
         <app-photo-editor [member]="member"></app-photo-editor>
       </tab>
     </tabset>
   </div>
-  <div class="col-4">
+  <div class="col-4 text-right">
     <div class="card">
       <img
         src="{{ member.photoUrl || './assets/user.png' }}"
@@ -117,19 +143,33 @@
       />
       <div class="card-body">
         <div>
-          <strong>الدولة والمدينة:</strong>
-          <p>{{ member.city }}, {{ member.country }}</p>
+          <strong>الإقامة</strong>
+          <p>{{ member.city }} - {{ member.country }}</p>
         </div>
         <div>
-          <strong>Age:</strong>
+          <strong>العمر</strong>
           <p>{{ member.age }}</p>
         </div>
+
         <div>
-          <strong>Last Active:</strong>
-          <p>{{ member.lastActive | timeago }}</p>
+          <strong>التخصص</strong>
+          <p>{{ member.major }}</p>
+        </div>
+
+        <div>
+          <strong>رقم الهاتف</strong>
+          <p>{{ member.phoneNumber }}</p>
         </div>
         <div>
-          <strong>Member since:</strong>
+          <strong>الجنسية</strong>
+          <p>{{ member.nationality }}</p>
+        </div>
+        <!-- <div>
+          <strong>Last Active:</strong>
+          <p>{{ member.lastActive | timeago }}</p>
+        </div> -->
+        <div>
+          <strong>عضو من منذ</strong>
           <p>{{ member.created | date: "dd MMM yyyy" }}</p>
         </div>
       </div>
@@ -140,7 +180,7 @@
           type="submit"
           class="btn btn-success btn-block"
         >
-          Save Changes
+          حفظ التغييرات
         </button>
       </div>
     </div>
