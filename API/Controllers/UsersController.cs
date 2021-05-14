@@ -39,10 +39,12 @@ namespace API.Controllers
     {
         var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
         userParams.CurrentUsername = User.GetUsername();
-// to get opposite gender if logged as opposite gender
+
+        // to get opposite gender if logged as opposite gender
         if (string.IsNullOrEmpty(userParams.Gender))
             userParams.Gender = gender == "male" ? "female" : "male";
-
+   
+        
         var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
         Response.AddPaginationHeader(

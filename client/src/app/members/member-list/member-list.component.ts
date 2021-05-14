@@ -20,8 +20,39 @@ export class MemberListComponent implements OnInit {
   user: User;
   genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }, { value: 'الكل', display: 'الكل' }];
   // control page size menu
-  pageSizeList = [{ value: 5, display: '5' }, { value: 10, display: '10' },{value: 15, display: '15'}];
+  pageSizeList = [{ value: 6, display: '6' }, { value: 12, display: '12' },{value: 18, display: '18'},{value: 24, display: '24'}];
+  countryList: Array<any> = [
+    { name: 'الكل', cities: [null] },
+    { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة', 'نجران'] },
+    { name: 'أمريكا', cities: ['واشنطن', 'نيويورك', 'أخرى'] },
+    { name: 'كندا', cities: ['تورونتو', 'أخرى'] },
+    { name: 'أمريكا الجنوبية', cities: ['البرازيل', 'أخرى'] },
+    { name: 'أوروبا', cities: ['السويد', 'ألمانيا', 'فرنسا', 'إسبانيا', 'أخرى'] },
+    { name: 'استراليا', cities: ['سيدني', 'أخرى'] },
+    { name: 'مصر', cities: ['القاهرة', 'أخرى'] },
+    { name: 'الكويت', cities: ['الكويت', 'أخرى'] },
+    { name: 'الإمارات', cities: ['الشارقة', 'دبي', 'أبو ظبي', 'أخرى'] },
+    { name: 'البحرين', cities: ['المنامة', 'أخرى'] },
+    { name: 'عمان', cities: ['مسقط', 'أخرى'] },
+    { name: 'اليمن', cities: ['صنعاء', 'أخرى'] },
+    { name: 'سوريا', cities: ['حلب', 'دمشق', 'حمص', 'حماة', 'دير الزور', 'أخرى'] },
+    { name: 'لبنان', cities: ['طرابلس', 'بيروت', 'أخرى'] },
+    { name: 'الأردن', cities: ['عمان', 'أخرى'] },
+    { name: 'العراق', cities: ['بغداد', 'أخرى'] },
+    { name: 'فلسطين', cities: ['القدس', 'أخرى'] },
+    { name: 'الجزائر', cities: ['الجزائر', 'أخرى'] },
+    { name: 'المغرب', cities: ['الدار البيضاء', 'أخرى'] },
+    { name: 'السودان', cities: ['الخرطوم', 'أخرى'] },
+    { name: 'ليبيا', cities: ['أخرى'] },
+    { name: 'تونس', cities: ['أخرى', 'تونس']
+  
+  }
+  ];
+  cities: Array<any>;
 
+  majors: Array<string> = ['فيزياء', 'كيمياء', 'رياضيات', 'برمجة', 'قرآن', 'فرنسي', 'إنجليزي', 'مدرس جامعي', 'دكتور جامعي',
+    'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد','الكل']
+    
   constructor(private memberService: MembersService) {
     this.userParams = this.memberService.getUserParams();
     // this.userParams = new UserParams();
@@ -29,6 +60,7 @@ export class MemberListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.resetFilters();
     this.loadMembers();
   }
 
@@ -38,6 +70,8 @@ export class MemberListComponent implements OnInit {
       this.members = response.result;
       this.pagination = response.pagination;
     })
+    // this.userParams.city = '';
+   
   }
 
   resetFilters() {
@@ -49,5 +83,14 @@ export class MemberListComponent implements OnInit {
     this.userParams.pageNumber = event.page;
     this.memberService.setUserParams(this.userParams);
     this.loadMembers();
+  }
+
+
+
+
+  changeCountry(country) {
+    // 
+    this.cities = this.countryList.find(con => con.name == country).cities;
+    this.userParams.city = this.cities[0];
   }
 }

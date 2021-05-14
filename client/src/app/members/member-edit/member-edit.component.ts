@@ -76,7 +76,8 @@ export class MemberEditComponent implements OnInit {
 
   changeCountry(country) {
     this.cities = this.countryList.find(con => con.name == country).cities;
-    
+    // to set city NgModel to first element in city array
+    this.member.city = this.cities[0];
   }
 
 }

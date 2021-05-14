@@ -41,15 +41,31 @@ namespace API.Data
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
             var query = _context.Users.AsQueryable();
-
-            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            // exclude fetching current logged in user & user Admin
+            query = query.Where(u => u.UserName != userParams.CurrentUsername && u.UserName != "admin");
+            
             if (userParams.Gender.Equals("female") || userParams.Gender.Equals("male") )
                 query = query.Where(u => u.Gender == userParams.Gender);
 
-            var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
-            var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
+            // var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);
+            // var maxDob = DateTime.Today.AddYears(-userParams.MinAge);
 
-            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+            // query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
+
+            // filter country only if we passed a URL paramater
+            // all parameter if passed from userParams.ts then dont filter countries
+            if(userParams.Country != null && userParams.Country != "الكل" )
+                query = query.Where(u => u.Country == userParams.Country);
+            // filter by city
+            if(userParams.City != null && userParams.City != "الكل" )
+                query = query.Where(c => c.City == userParams.City);
+            // major filter
+            if(userParams.Major != null && userParams.Major != "الكل")
+                query = query.Where(m => m.Major == userParams.Major);
+            // by default it's false unless passing parameter as true
+            query = query.Where(iv => iv.IsVerified == userParams.isVerified);
+
+
 
             query = userParams.OrderBy switch
             {
@@ -58,7 +74,7 @@ namespace API.Data
             };
 
             return await PagedList<MemberDto>.CreateAsync(
-                query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), //source
                     userParams.PageNumber, userParams.PageSize);
         }
 
@@ -79,6 +95,13 @@ namespace API.Data
             return await _context.Users
                 .Where(x => x.UserName == username)
                 .Select(x => x.Gender).FirstOrDefaultAsync();
+        }
+//  May delete this
+        public async Task<string> GetUserCountry(string username)
+        {
+            return await _context.Users
+                .Where(x => x.UserName == username)
+                .Select(x => x.Country).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<AppUser>> GetUsersAsync()
