@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
+import { Pagination } from 'src/app/_models/pagination';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
 
@@ -12,6 +13,7 @@ import { AdminService } from 'src/app/_services/admin.service';
 export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef: BsModalRef;
+  pagination: Pagination;
 
   constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
@@ -22,6 +24,7 @@ export class UserManagementComponent implements OnInit {
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe(users => {
       this.users = users;
+      // this.pagination = users.pagination;
     })
   }
 

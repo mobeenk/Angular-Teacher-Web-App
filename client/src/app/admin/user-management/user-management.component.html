@@ -1,20 +1,13 @@
-
-    <div class="card-body"
-
-            style="overflow: scroll; height: 500px;"
-          
-    >
+    <!-- style="overflow: scroll; height: 500px;" -->
+    <div class="card-body" >
         <div class="row">
-            <table class="table"
-       
-            >
+            <table class="table" >
                 <tr>
                     <th style="width: 30%;">Username</th>
                     <th style="width: 40%;">Active roles</th>
                     <th style="width: 30%;"></th>
                 </tr>
-                <tr *ngFor="let user of users"
-                >
+                <tr *ngFor="let user of users">
                     <td>{{user.username}}</td>
                     <td>{{user.roles}}</td>
                     <td><button (click)="openRolesModal(user)" class="btn btn-info">Edit Roles</button></td>
@@ -24,3 +17,19 @@
         
 
     </div>
+
+    
+    <!-- <div class="d-flex justify-content-center" *ngIf="!pagination">
+        <pagination
+          [boundaryLinks]="true"
+          [totalItems]="pagination.totalItems"
+          [itemsPerPage]="pagination.itemsPerPage"
+          [(ngModel)]="pagination.currentPage"
+          (pageChanged)="pageChanged($event)"
+          previousText="&lsaquo;"
+          nextText="&rsaquo;"
+          firstText="&laquo;"
+          lastText="&raquo;"
+        >
+        </pagination>
+    </div> -->

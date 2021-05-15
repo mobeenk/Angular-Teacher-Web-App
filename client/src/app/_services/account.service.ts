@@ -6,6 +6,7 @@ import { ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { PresenceService } from './presence.service';
 import { resetUser } from '../_models/resetUser';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -15,17 +16,20 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   
-  constructor(private http: HttpClient, private presence: PresenceService) { }
+  constructor(private http: HttpClient, private presence: PresenceService, private toastr: ToastrService) { }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
-      map((response: User) => {
-        const user = response;
-        if (user) {
-          this.setCurrentUser(user);
-          this.presence.createHubConnection(user);
-        }
-      })
+        map((response: User) =>
+        {
+          const user = response;
+          if (user) {
+            this.setCurrentUser(user);
+            this.presence.createHubConnection(user);
+            this.toastr.info('logged in');
+          }
+        }// ,(error)=>{ this.toastr.error(error)}
+      )
     )
   }
 

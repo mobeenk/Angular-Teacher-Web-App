@@ -46,20 +46,23 @@
       >
 
       <button
+      [disabled]="!loginForm.dirty"
       tabindex="3"
       class="btn btn-success my-2 mr-2 my-sm-0" type="submit">
         دخول
       </button>
       <input
-        tabindex="3"
+        tabindex="30"
         name="password"
         [(ngModel)]="model.password"
+        required
         class="form-control mr-sm-2 text-right"
         type="password"
         placeholder="كلمة المرور"
       />
       <input
-        tabindex="2"
+      required
+        tabindex="20"
         name="username"
         [(ngModel)]="model.username"
         class="form-control mr-sm-2 text-right"

@@ -81,18 +81,33 @@ namespace API.Controllers
         var user = await _userManager.Users
             .Include(p => p.Photos)
             .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
-
+        //  var tryaccess = await _userManager.
         if (user == null)
             return Unauthorized("Invalid username");
 
-        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
-        if (result.Succeeded)
-        {
-            // await _mailService.SendEmailAsync
-            //   ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
+        var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, true);
+        // if (result.Succeeded)
+        // {
+        //     await _mailService.SendEmailAsync
+        //       ("moubien.kayali@gmail.com", "hi", "<h1>test</h1>");
+        // }
+        if (!result.Succeeded){
+            //  await _userManager.AccessFailedAsync(user);
+            //  int failsCount = user.AccessFailedCount;
+        //  to return the right error
+             if(DateTimeOffset.Now <  user.LockoutEnd){
+               
+                 return Unauthorized("تم تعليق الحساب");
+             }
+             else{
+  
+                  return Unauthorized("اسم المستخدم أو كلمة المرور خطأ");
+             }
+            //  
+             
+            // return BadRequest("nawossnam");
         }
-        if (!result.Succeeded)
-            return Unauthorized();
+   
 
         return new UserDto
         {

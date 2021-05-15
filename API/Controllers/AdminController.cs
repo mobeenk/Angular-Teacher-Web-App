@@ -1,7 +1,13 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,31 +20,69 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPhotoService _photoService;
-        public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, IPhotoService photoService)
+        private readonly IMapper _mapper;
+        public AdminController(UserManager<AppUser> userManager
+        , IUnitOfWork unitOfWork, IPhotoService photoService
+        , IMapper mapper
+        )
         {
             _photoService = photoService;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
+            _mapper = mapper;
         }
+    //       [Authorize(Policy = "RequireAdminRole")]
+    //     [HttpGet("users-with-roles")]
+    //   public async Task<ActionResult> GetUsersWithRoles()
+    //     {
+    //         var users = await _userManager.Users
+    //             .Include(r => r.UserRoles)
+    //             .ThenInclude(r => r.Role)
+    //             .OrderBy(u => u.UserName)
+    //             .Select(u => new
+    //             {
+    //                 u.Id,
+    //                 Username = u.UserName,
+    //                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
+    //             })
+    //             .ToListAsync();
+
+
+    //         return Ok(users);
+    //     }
+
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpGet("users-with-roles")]
-        public async Task<ActionResult> GetUsersWithRoles()
+        public async Task<ActionResult<IEnumerable<AdminUsersDto>>> GetUsersWithRoles([FromQuery] UserParams userParams)
         {
-            var users = await _userManager.Users
-                .Include(r => r.UserRoles)
-                .ThenInclude(r => r.Role)
-                .OrderBy(u => u.UserName)
-                .Select(u => new
+            userParams.CurrentUsername = User.GetUsername();
+           var users = await GetAdminUsers(userParams);
+           
+              Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
+                users.TotalCount, users.TotalPages);
+            return Ok(users);
+        }
+        public async Task<PagedList<AdminUsersDto>> GetAdminUsers(UserParams likesParams)
+        {
+               var query =  _userManager.Users.AsQueryable()
+               .Include(r => r.UserRoles)
+               .ThenInclude(r => r.Role)
+               .OrderBy(u => u.UserName)
+               .Select(u => new
                 {
                     u.Id,
                     Username = u.UserName,
                     Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
                 })
-                .ToListAsync();
-
-            return Ok(users);
+                .ProjectTo<AdminUsersDto>(_mapper.ConfigurationProvider).AsNoTracking()
+               ;
+           
+            return await PagedList<AdminUsersDto>.CreateAsync(
+                 query,
+                likesParams.PageNumber, likesParams.PageSize);
         }
+
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
