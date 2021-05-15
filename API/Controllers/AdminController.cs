@@ -31,7 +31,7 @@ namespace API.Controllers
             _userManager = userManager;
             _mapper = mapper;
         }
-    //       [Authorize(Policy = "RequireAdminRole")]
+    //     [Authorize(Policy = "RequireAdminRole")]
     //     [HttpGet("users-with-roles")]
     //   public async Task<ActionResult> GetUsersWithRoles()
     //     {
@@ -66,15 +66,9 @@ namespace API.Controllers
         public async Task<PagedList<AdminUsersDto>> GetAdminUsers(UserParams likesParams)
         {
                var query =  _userManager.Users.AsQueryable()
-               .Include(r => r.UserRoles)
-               .ThenInclude(r => r.Role)
-               .OrderBy(u => u.UserName)
-               .Select(u => new
-                {
-                    u.Id,
-                    Username = u.UserName,
-                    Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
-                })
+                .Include(r => r.UserRoles)
+                // .ThenInclude(r => r.Role)
+                .OrderBy(u => u.UserName)
                 .ProjectTo<AdminUsersDto>(_mapper.ConfigurationProvider).AsNoTracking()
                ;
            

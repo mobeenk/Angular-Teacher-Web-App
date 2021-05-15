@@ -18,9 +18,12 @@ namespace API.Helpers
             CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
-            // Test
+            // This is to add pagination for useradmin-managment
+
             CreateMap<AppUser, AdminUsersDto>()
-            .ForMember(d => d.Roles, o => o.MapFrom(s => s.UserRoles.Select(c => c.RoleId).ToArray()));
+                .ForMember(d => d.Roles,
+                 o => o.MapFrom( 
+                     s => s.UserRoles.Select(c => c.Role.Name) ))
             // .ForMember(dest => dest.Roles, src => src.MapFrom(t => t.UserRoles))
             ;
 

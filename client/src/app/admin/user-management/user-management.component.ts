@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { Pagination } from 'src/app/_models/pagination';
 import { User } from 'src/app/_models/user';
+import { UserParams } from 'src/app/_models/userParams';
 import { AdminService } from 'src/app/_services/admin.service';
 
 @Component({
@@ -14,18 +15,35 @@ export class UserManagementComponent implements OnInit {
   users: Partial<User[]>;
   bsModalRef: BsModalRef;
   pagination: Pagination;
-
-  constructor(private adminService: AdminService, private modalService: BsModalService) { }
+  memberCache = new Map();
+  constructor(private adminService: AdminService, private modalService: BsModalService)
+   { }
 
   ngOnInit(): void {
+ 
     this.getUsersWithRoles();
   }
 
+  // getUsersWithRoles() {
+  //   this.adminService.getUsersWithRoles().subscribe(users => {
+  //     this.users = users;
+  //     // this.pagination = users.pagination;
+  //   })
+  // }
+  pageNumber = 1;
+  pageSize = 10;
+
   getUsersWithRoles() {
-    this.adminService.getUsersWithRoles().subscribe(users => {
-      this.users = users;
-      // this.pagination = users.pagination;
+    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize)
+    .subscribe(response => {
+      this.users = response.result;
+      this.pagination = response.pagination;
     })
+  }
+
+  pageChanged(event: any) {
+    this.pageNumber = event.page;
+    this.getUsersWithRoles();
   }
 
   openRolesModal(user: User) {
