@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
@@ -51,10 +53,10 @@ namespace API.Controllers
     //         return Ok(users);
     //     }
 
-
+//  POLICIES ARE SET IN IdentityServiceExtension.cs class
         [Authorize(Policy = "RequireAdminRole")]
-        [HttpGet("users-with-roles")]
-        public async Task<ActionResult<IEnumerable<AdminUsersDto>>> GetUsersWithRoles([FromQuery] UserParams userParams)
+        [HttpGet("users-with-roles")] 
+         public async Task<ActionResult<IEnumerable<AdminUsersDto>>> GetUsersWithRoles([FromQuery] UserParams userParams)
         {
             userParams.CurrentUsername = User.GetUsername();
            var users = await GetAdminUsers(userParams);
@@ -63,18 +65,19 @@ namespace API.Controllers
                 users.TotalCount, users.TotalPages);
             return Ok(users);
         }
-        public async Task<PagedList<AdminUsersDto>> GetAdminUsers(UserParams likesParams)
+        public async Task<PagedList<AdminUsersDto>> GetAdminUsers(UserParams userparams)
         {
-               var query =  _userManager.Users.AsQueryable()
+ 
+                var query =  _userManager.Users.AsQueryable()
                 .Include(r => r.UserRoles)
-                // .ThenInclude(r => r.Role)
                 .OrderBy(u => u.UserName)
-                .ProjectTo<AdminUsersDto>(_mapper.ConfigurationProvider).AsNoTracking()
-               ;
-           
+                .ProjectTo<AdminUsersDto>(_mapper.ConfigurationProvider).AsNoTracking();
+            // if we passed a username to search from angular
+            if (userparams.Username !=null )
+                query = query.Where(u => u.Username == userparams.Username );
+
             return await PagedList<AdminUsersDto>.CreateAsync(
-                 query,
-                likesParams.PageNumber, likesParams.PageSize);
+                 query, userparams.PageNumber, userparams.PageSize);
         }
 
 
@@ -86,17 +89,20 @@ namespace API.Controllers
 
             var user = await _userManager.FindByNameAsync(username);
 
-            if (user == null) return NotFound("Could not find user");
-
+            if (user == null) 
+                return NotFound("Could not find user");
+            // get this user roles
             var userRoles = await _userManager.GetRolesAsync(user);
-
+            // add the roles
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
-            if (!result.Succeeded) return BadRequest("Failed to add to roles");
+            if (!result.Succeeded) 
+                return BadRequest("Failed to add to roles");
 
             result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
 
-            if (!result.Succeeded) return BadRequest("Failed to remove from roles");
+            if (!result.Succeeded) 
+                return BadRequest("Failed to remove from roles");
 
             return Ok(await _userManager.GetRolesAsync(user));
         }
@@ -155,6 +161,44 @@ namespace API.Controllers
                 photo.IsMain = true;
 
             await _unitOfWork.Complete();
+            return Ok();
+        }
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("ban-user/{username}")]
+        public async Task<ActionResult> BanUser(string username){
+       
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            if(user.UserName.Equals("admin"))
+                return BadRequest("لا يمكن حظر المدير");
+            if( user.LockoutEnd > DateTimeOffset.Now){
+                return  BadRequest("Already Banned");  // BadRequest("User Banned Already");
+            }
+            else{
+                user.LockoutEnd = DateTimeOffset.Now.AddYears(100);
+            }
+          
+            // user.Photos.
+            // if (user == null)
+            //      return  BadRequest(HttpStatusCode.NotFound);
+
+            // var rolesForUser = await _userManager.GetRolesAsync(user);
+            // if (rolesForUser.Count() > 0)
+            // {
+            //     foreach (var item in rolesForUser.ToList())
+            //     {
+            //     // item should be the name of the role
+            //         var result = await _userManager.RemoveFromRoleAsync(user, item);
+            //     }
+            // }
+            // await _userManager.DeleteAsync(user);
+            return Ok();
+        }
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("unban-user/{username}")]
+        public async Task<ActionResult> UnbanUser(string username){
+       
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            user.LockoutEnd = DateTimeOffset.Now;
             return Ok();
         }
     }

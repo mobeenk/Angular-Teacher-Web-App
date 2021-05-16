@@ -11,6 +11,8 @@ namespace API.Helpers
         public string City { get; set; }
         public string Major { get; set; }
         public bool isVerified { get; set; }
+        // for admin search
+        public string Username { get; set; }
 
         
     }

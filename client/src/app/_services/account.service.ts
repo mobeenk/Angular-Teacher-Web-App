@@ -47,7 +47,9 @@ export class AccountService {
 
   setCurrentUser(user: User) {
     user.roles = [];
+    // this roles is either single element or an Array
     const roles = this.getDecodedToken(user.token).role;
+    // so we add an array of roles if empty or we push
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
@@ -60,6 +62,7 @@ export class AccountService {
   }
 
   getDecodedToken(token) {
+    // token is: Header, Payload, Signiture and 1 is index of payload that we need to get
     return JSON.parse(atob(token.split('.')[1]));
   }
 

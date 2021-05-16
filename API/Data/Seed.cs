@@ -17,8 +17,9 @@ namespace API.Data
 
             var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
-            if (users == null) return;
-
+            if (users == null)
+                 return;
+        // Adding roles to users
             var roles = new List<AppRole>
             {
                 new AppRole{Name = "Member"},
@@ -27,7 +28,7 @@ namespace API.Data
             };
 
             foreach (var role in roles)
-            {
+            {// create role using microsoft identity
                 await roleManager.CreateAsync(role);
             }
             
@@ -38,7 +39,7 @@ namespace API.Data
                 await userManager.CreateAsync(user, "Pa$$w0rd");
                 await userManager.AddToRoleAsync(user, "Member");
             }
-
+            // creating the admin
             var admin = new AppUser
             {
                 UserName = "admin"

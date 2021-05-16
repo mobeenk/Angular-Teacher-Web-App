@@ -8,6 +8,7 @@ import { User } from 'src/app/_models/user';
   styleUrls: ['./roles-modal.component.css']
 })
 export class RolesModalComponent implements OnInit {
+  // Because we need to emit to parent what roles we have to update from this modal
   @Input() updateSelectedRoles = new EventEmitter();
   user: User;
   roles: any[]; 
@@ -18,6 +19,7 @@ export class RolesModalComponent implements OnInit {
   }
 
   updateRoles() {
+    // emit those roles then hide modal
     this.updateSelectedRoles.emit(this.roles);
     this.bsModalRef.hide();
   }

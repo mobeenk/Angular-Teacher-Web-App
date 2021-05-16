@@ -17,6 +17,7 @@ namespace API.Services
     {
         private readonly SymmetricSecurityKey _key;
         private readonly UserManager<AppUser> _userManager;
+        // inject the usermanager for Appuser to add data to token 
         public TokenService(IConfiguration config, UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -32,7 +33,7 @@ namespace API.Services
             };
 
             var roles = await _userManager.GetRolesAsync(user);
-
+            // add roles to set of claims
             claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);

@@ -19,14 +19,21 @@ export class AdminService {
   //   return this.http.get<Partial<User[]>>(this.baseUrl + 'admin/users-with-roles');
   // }
  
-  getUsersWithRoles(pageNumber, pageSize) {
+  getUsersWithRoles(pageNumber, pageSize,searchUser?) {
     let params = getPaginationHeaders(pageNumber, pageSize);
-    // params = params.append('totalItems', totalItems);
+    if(searchUser)
+      params = params.append('username', searchUser);
     return getPaginatedResult<User[]>(this.baseUrl + 'admin/users-with-roles', params, this.http);
   }
 
   updateUserRoles(username: string, roles: string[]) {
     return this.http.post(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + roles, {});
+  }
+  banUser(username: string){
+    return this.http.post(this.baseUrl+'admin/ban-user/'+ username,{} ,{observe: 'response'} );
+  }
+  unBanUser(username: string){
+    return this.http.post(this.baseUrl+'admin/unban-user/'+ username,{} ,{observe: 'response'} );
   }
 // photos approval
   getPhotosForApproval(){

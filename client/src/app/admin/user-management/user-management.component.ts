@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { Pagination } from 'src/app/_models/pagination';
 import { User } from 'src/app/_models/user';
@@ -16,12 +17,20 @@ export class UserManagementComponent implements OnInit {
   bsModalRef: BsModalRef;
   pagination: Pagination;
   memberCache = new Map();
-  constructor(private adminService: AdminService, private modalService: BsModalService)
+  pageSizeList = [{ value: 6, display: '6' }
+  , { value: 10, display: '10' },
+  {value: 18, display: '18'},
+  {value: 24, display: '24'}];
+
+  searchUser: string;
+  constructor(private adminService: AdminService, private modalService: BsModalService ,private toastr: ToastrService)
    { }
 
   ngOnInit(): void {
- 
-    this.getUsersWithRoles();
+    this.getUsersWithRoles(this.searchUser);
+  }
+  setSearch(){
+    this.getUsersWithRoles(this.searchUser);
   }
 
   // getUsersWithRoles() {
@@ -33,8 +42,15 @@ export class UserManagementComponent implements OnInit {
   pageNumber = 1;
   pageSize = 10;
 
-  getUsersWithRoles() {
-    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize)
+  getUsersWithRoles(searchUser?: string) {
+    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize,searchUser)
+    .subscribe(response => {
+      this.users = response.result;
+      this.pagination = response.pagination;
+    })
+  }
+  getUser(searchUser: string) {
+    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize,searchUser)
     .subscribe(response => {
       this.users = response.result;
       this.pagination = response.pagination;
@@ -45,8 +61,30 @@ export class UserManagementComponent implements OnInit {
     this.pageNumber = event.page;
     this.getUsersWithRoles();
   }
-
+   banUser(username :string){
+    this.adminService.banUser(username).subscribe( 
+      (data) => {
+          this.toastr.success('تم حظر المستخدم')
+        }
+      ,
+      // server error returned
+      (error) => {
+        if(username != 'admin')
+          this.toastr.error('محظور مسبقاًُ');
+        console.log(error);
+      }
+    )
+    
+  }
+  unBanUser(username :string){
+    this.adminService.unBanUser(username).subscribe( 
+      (data) => {
+          this.toastr.success('تم إلفاء الحظر ')
+        }
+    )
+  }
   openRolesModal(user: User) {
+    // this is the Modal Configuration
     const config = {
       class: 'modal-dialog-centered',
       initialState: {
@@ -54,7 +92,10 @@ export class UserManagementComponent implements OnInit {
         roles: this.getRolesArray(user)
       }
     }
+    // modal reference from Dependecay Injection we added the Modal Class
     this.bsModalRef = this.modalService.show(RolesModalComponent, config);
+    
+    // here we pass content to @Input in the modal which is updateSelectedRoles
     this.bsModalRef.content.updateSelectedRoles.subscribe(values => {
       const rolesToUpdate = {
         roles: [...values.filter(el => el.checked === true).map(el => el.name)]
@@ -66,7 +107,7 @@ export class UserManagementComponent implements OnInit {
       }
     })
   }
-
+// this method to check if user has any roles then check
   private getRolesArray(user) {
     const roles = [];
     const userRoles = user.roles;
@@ -93,5 +134,6 @@ export class UserManagementComponent implements OnInit {
     })
     return roles;
   }
+
 
 }

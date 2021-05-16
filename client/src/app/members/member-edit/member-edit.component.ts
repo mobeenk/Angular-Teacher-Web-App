@@ -44,7 +44,7 @@ export class MemberEditComponent implements OnInit {
   ];
   cities: Array<string>;
   majors: Array<string> = ['فيزياء', 'كيمياء', 'رياضيات', 'برمجة', 'قرآن', 'فرنسي', 'إنجليزي', 'مدرس جامعي', 'دكتور جامعي',
-  'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد']
+  'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد','الكل']
 
   @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any) {
     if (this.editForm.dirty) {
