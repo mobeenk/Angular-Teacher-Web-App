@@ -19,6 +19,7 @@ export class MemberEditComponent implements OnInit {
 
 
   countryList: Array<any> = [
+    { name: 'الكل', cities: [  'الكل'] },
     { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة','نجران'] },
     { name: 'أمريكا', cities: ['واشنطن', 'نيويورك','أخرى'] },
     { name: 'كندا', cities: [ 'تورونتو','أخرى'] },

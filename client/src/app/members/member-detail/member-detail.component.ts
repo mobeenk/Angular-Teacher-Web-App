@@ -26,6 +26,8 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   user: User;
 
+  isPressed: boolean;
+
   constructor(public presence: PresenceService, private route: ActivatedRoute, 
     private messageService: MessageService, private accountService: AccountService,
     private router: Router) { 
@@ -89,6 +91,9 @@ export class MemberDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.messageService.stopHubConnection();
+  }
+  revealNumber() {
+    this.isPressed = true
   }
 
 }

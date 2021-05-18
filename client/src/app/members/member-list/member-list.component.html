@@ -1,5 +1,5 @@
 <div class="text-center mt-3">
-  <h2>Your matches - {{ pagination?.totalItems }} found</h2>
+  <h2>نتائج البحث - {{ pagination?.totalItems }} تم العثور عليه</h2>
 </div>
 
 <div class="container mt-3" dir="rtl">
@@ -90,7 +90,7 @@
             btnRadio="created"
             [(ngModel)]="userParams.orderBy"
           >
-            Newest Members
+            المنضمين حديثاً
           </button>
           <button
             type="button"
@@ -100,7 +100,7 @@
             btnRadio="lastActive"
             [(ngModel)]="userParams.orderBy"
           >
-            Last Active
+            آخر ظهور
           </button>
         </div>
       </div>

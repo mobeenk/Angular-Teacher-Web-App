@@ -1,7 +1,8 @@
 <div class="card">
     <div class="card-body">
         <div *ngIf="(messageService.messageThread$ | async)?.length === 0">
-            No messages yet... say hi by using the message box below
+            <!-- No messages yet... say hi by using the message box below -->
+            لا يوجد رسائل سابقة ... لإرسال رسالة استخدم مربع الإدخال أدناه
         </div>
 
         <ul #scrollMe
@@ -21,11 +22,11 @@
                                 <span class="fa fa-clock-o">{{message.messageSent | timeago}}</span>
                                 <span class="text-danger" *ngIf="!message.dateRead 
                                     && message.senderUsername !== username">
-                                    (unread)
+                                    (غير مقروء)
                                 </span>
                                 <span class="text-success" *ngIf="message.dateRead 
                                     && message.senderUsername !== username">
-                                    (read {{message.dateRead | timeago}})
+                                    (مقروء {{message.dateRead | timeago}})
                                 </span>
                             </small>
                         </div>
@@ -48,7 +49,7 @@
                     [(ngModel)]="messageContent"
                     type="text" 
                     class="form-control input-sm" 
-                    placeholder="Send a private message">
+                    placeholder="أرسل رسالة خاصة">
             </div>
         </form>
     </div>

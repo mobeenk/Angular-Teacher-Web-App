@@ -50,7 +50,7 @@ export class GuestsComponent implements OnInit {
   //   { value: 'تونس', display: 'تونس'}
   // ];
   countryList: Array<any> = [
-    { name: 'الكل', cities: [null] },
+    { name: 'الكل', cities: ['الكل'] },
     { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة', 'نجران'] },
     { name: 'أمريكا', cities: ['واشنطن', 'نيويورك', 'أخرى'] },
     { name: 'كندا', cities: ['تورونتو', 'أخرى'] },

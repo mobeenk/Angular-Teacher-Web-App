@@ -1,5 +1,5 @@
 <div class="text-center mt-3">
-  <h2>Your matches - {{ pagination?.totalItems }} found</h2>
+  <h2>نتائج البحث - {{ pagination?.totalItems }} تم العثور عليه</h2>
 </div>
 
 <div class="container mt-3" dir="rtl">
@@ -95,7 +95,7 @@
     <div class="row">
       <button class="btn btn-primary ml-1" type="submit">Apply Filters</button>
       <button (click)="resetFilters()" class="btn btn-info ml-1" type="submit">
-        Reset Filters
+        إلغاء الغلاتر
       </button>
       <div class="col">
         <div class="btn-group float-left">
@@ -107,7 +107,7 @@
             btnRadio="created"
             [(ngModel)]="guestParams.orderBy"
           >
-            Newest Members
+            المنضمين حديثاً
           </button>
 
           <button
@@ -118,7 +118,7 @@
             btnRadio="lastActive"
             [(ngModel)]="guestParams.orderBy"
           >
-            Last Active
+            آخر ظهور
           </button>
         </div>
       </div>
