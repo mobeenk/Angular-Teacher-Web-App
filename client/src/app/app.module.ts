@@ -42,6 +42,8 @@ import { ResetEmailformComponent } from './reset-emailform/reset-emailform.compo
 import { GuestsComponent } from './guests-components/guests/guests.component';
 import { GuestCardComponent } from './guests-components/guest-card/guest-card.component';
 import { GuestDetailComponent } from './guests-components/guest-detail/guest-detail.component';
+import { ShortenPipe } from './_pipes/shorten.pipe';
+import { RegisterStudentComponent } from './register-student/register-student.component';
 
 
 
@@ -78,7 +80,9 @@ import { GuestDetailComponent } from './guests-components/guest-detail/guest-det
     ResetEmailformComponent,
     GuestsComponent,
     GuestCardComponent,
-    GuestDetailComponent
+    GuestDetailComponent,
+    ShortenPipe,
+    RegisterStudentComponent
     
 
  

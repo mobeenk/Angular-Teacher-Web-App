@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent implements OnInit {
   registerMode = false;
 
+  registerStudentMode = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -17,9 +18,14 @@ export class HomeComponent implements OnInit {
   registerToggle() {
     this.registerMode = !this.registerMode;
   }
+  // studnet
+  registerStudentToggle() {
+    this.registerStudentMode = !this.registerStudentMode;
+  }
 
   cancelRegisterMode(event: boolean) {
     this.registerMode = event;
+    this.registerStudentMode = event;
   }
 
 }

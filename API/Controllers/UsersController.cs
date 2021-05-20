@@ -42,9 +42,9 @@ namespace API.Controllers
 
         // to get opposite gender if logged as opposite gender
         // if (string.IsNullOrEmpty(userParams.Gender))
-        //     userParams.Gender = gender == "male" ? "female" : "male";
-   
-        
+        //     userParams.Gender = gender == student ? all : all;
+
+    // Query is inside this method in usersRepo
         var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 
         Response.AddPaginationHeader(

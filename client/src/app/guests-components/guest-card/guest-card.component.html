@@ -1,8 +1,8 @@
 
 <!-- PROFILE -->
 
-<div class="card mb-4">
-    <div class="card-img-wrapper">
+<div class="card mb-4"  style="width: 11.2em;">
+    <div class="card-img-wrapper" >
         <img *ngIf="member.gender == 'معلم'" src="{{member.photoUrl || (   './assets/user.png' )   }}" alt="{{member.knownAs}}" class="card-img-top image">
         <img *ngIf="member.gender == 'معلمة'" src="{{member.photoUrl || (   './assets/femaleUser.png' )   }}" alt="{{member.knownAs}}" class="card-img-top image">
         <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top image"> -->
@@ -12,7 +12,10 @@
             width="30px" height="20px"
             title=" الإقامة: {{member.country}} - {{member.city}}"
         />
-
+        <div  style=" position: absolute; top: 2px; left: 2px;" >
+            <span title="معلم"><i *ngIf="member.gender == 'معلم'" class="fa fa-mars" ></i></span>
+            <span title="معلمة"><i *ngIf="member.gender == 'معلمة'" class="fa fa-venus" ></i></span>
+        </div>
         <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">
                 <button routerLink='/guests/{{member.username}}' 
@@ -32,7 +35,10 @@
             <!-- , {{member.major}} -->
                 <!-- <img class="i" src="./assets/svg-country-flags/png100px/{{member.country}}.png" width="30px" height="20px"/> -->
         </h6>
-        <p class="card-text text-muted text-center">{{member.major}}</p>
+        <div class="text-muted text-center">{{member.major}} <br> </div>
+        <div class="text-right" style="font-size: 12px; font-style: normal;">
+            {{member.interests == null ? member.interests : ( member.lookingFor| shorten:30) }} 
+        </div> 
 
     </div>
 </div>

@@ -65,7 +65,7 @@
             </div>
 
             <!-- MAJOR -->
-            <div class="form-group col-md-3">
+            <div *ngIf="member.gender != 'طالب' && member.gender !='طالبة'" class="form-group col-md-3">
               <label for="major">التخصص </label>
             <select
               class="form-control"
@@ -113,20 +113,27 @@
             name="introduction"
             rows="6"
           ></textarea>
-          <h4 class="mt-2">المواد التي أدرسها</h4>
-          <textarea
-            class="form-control"
-            [(ngModel)]="member.lookingFor"
-            name="lookingFor"
-            rows="6"
-          ></textarea>
-          <h4 class="mt-2">بيانات إضافية</h4>
-          <textarea
-            class="form-control"
-            [(ngModel)]="member.interests"
-            name="interests"
-            rows="6"
-          ></textarea>
+
+          <div *ngIf="member.gender != 'طالب' && member.gender !='طالبة'" >
+            <h4 class="mt-2" >
+              المواد التي أدرسها</h4>
+            <textarea
+              class="form-control"
+              [(ngModel)]="member.lookingFor"
+              name="lookingFor"
+              rows="6"
+            ></textarea>
+          </div>
+   <div *ngIf="member.gender != 'طالب' && member.gender !='طالبة'">
+    <h4 class="mt-2">بيانات إضافية</h4>
+    <textarea
+      class="form-control"
+      [(ngModel)]="member.interests"
+      name="interests"
+      rows="6"
+    ></textarea>
+   </div>
+ 
         </form>
       </tab>
       <tab heading="إضافة الصور الشخصية والشهادات">
@@ -136,8 +143,8 @@
   </div>
   <div class="col-4 text-right">
     <div class="card">
-      <img *ngIf="member.gender == 'معلم'" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
-      <img *ngIf="member.gender == 'معلمة'" src="{{ member.photoUrl || './assets/femaleUser.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+      <img *ngIf="member.gender == 'معلم'  || member.gender =='طالب'" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+      <img *ngIf="member.gender == 'معلمة' || member.gender =='طالبة'" src="{{ member.photoUrl || './assets/femaleUser.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
 
       <div class="card-body">
         <div>
@@ -149,7 +156,7 @@
           <p>{{ member.age }}</p>
         </div>
 
-        <div>
+        <div *ngIf="member.gender != 'طالب' && member.gender !='طالبة'">
           <strong>التخصص</strong>
           <p>{{ member.major }}</p>
         </div>

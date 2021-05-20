@@ -1,14 +1,15 @@
 <div class="row">
 
 
-    <div class="col-8" >
+    <div  class="col-8" >
 
 
     <tabset dir="rtl"  class="member-tabset text-right" #memberTabs>
         <tab  heading='About {{member.knownAs}}' (selectTab)="onTabActivated($event)" style="float: right;">
             <h4>معلومات عني</h4>
             <p>{{member.introduction}}</p>
-            <h4>المواد التي أدرسها</h4>
+            <h4  *ngIf="member.gender != 'طالب' && member.gender !='طالبة'" >
+              المواد التي أدرسها</h4>
             <p>{{member.lookingFor}}</p>
         </tab>
          <tab heading='مهارات إضافية' (selectTab)="onTabActivated($event)">
@@ -29,8 +30,8 @@
     </div>
     <div class="col-4">
         <div class="card">
-          <img *ngIf="member.gender== 'معلم'" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
-          <img *ngIf="member.gender== 'معلمة'" src="{{ member.photoUrl || './assets/femaleUser.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+          <img *ngIf="member.gender== 'معلم' || member.gender =='طالب'" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+          <img *ngIf="member.gender== 'معلمة' || member.gender =='طالبة'" src="{{ member.photoUrl || './assets/femaleUser.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
             <div class="card-body text-right">
                 <div class="mb-2" *ngIf="(presence.onlineUsers$ | async).includes(member.username)" >
                     <i class="fa fa-user-circle text-success"></i> Online now

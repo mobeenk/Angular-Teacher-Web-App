@@ -12,17 +12,16 @@
     <label class="radio-inline">
       <input 
       type="radio" 
-      value="معلم" 
-      formControlName="gender" /> معلم
+      value="طالب" 
+      formControlName="gender" /> طالب
     </label>
     <label class="radio-inline">
       <input
         type="radio"
-        value="معلمة"
+        value="طالبة"
         formControlName="gender"
         class="ml-3"
-      />
-      معلمة
+      /> طالبة
     </label>
   </div>
   <!-- REAL NAME -->
@@ -44,18 +43,18 @@
     [maxDate]="maxDate"
   ></app-date-input>
   <!-- MAJOR -->
-  <select
+  <!-- <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['major']"
     dir="rtl"
   >
     <option value="" disabled selected>إختر التخصص</option>
     <option *ngFor="let major of majors">{{ major }}</option>
-  </select>
+  </select> -->
 
   <!-- Nationality -->
 
-  <select
+  <!-- <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['nationality']"
     dir="rtl"
@@ -63,10 +62,10 @@
   >
     <option value="" disabled selected>إختر الجنسية</option>
     <option *ngFor="let count of countryList">{{ count.name }}</option>
-  </select>
+  </select> -->
 
   <!-- Residency Country -->
-  <select
+  <!-- <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['country']"
     dir="rtl"
@@ -76,17 +75,17 @@
   >
     <option value="" disabled selected>إختر الدولة</option>
     <option *ngFor="let count of countryList">{{ count.name }}</option>
-  </select>
+  </select> -->
 
   <!--  CITY -->
-  <select
+  <!-- <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['city']"
     dir="rtl"
   >
     <option value="" disabled selected>إختر المدينة</option>
     <option *ngFor="let city of cities">{{ city }}</option>
-  </select>
+  </select> -->
   <!-- mail -->
   <app-text-input
     [formControl]="registerForm.controls['email']"
@@ -95,11 +94,11 @@
   ></app-text-input>
 
   <!-- phone -->
-  <app-text-input
+  <!-- <app-text-input
     [formControl]="registerForm.controls['phoneNumber']"
     [label]="'رقم الجوال أو الواتساب'"
     [class]="'text-right'"
-  ></app-text-input>
+  ></app-text-input> -->
   <!-- PASSWORD -->
   <app-text-input
     [formControl]="registerForm.controls['password']"
@@ -137,3 +136,4 @@
     </button>
   </div>
 </form>
+
