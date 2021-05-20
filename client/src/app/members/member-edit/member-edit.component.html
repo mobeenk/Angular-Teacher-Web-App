@@ -136,11 +136,9 @@
   </div>
   <div class="col-4 text-right">
     <div class="card">
-      <img
-        src="{{ member.photoUrl || './assets/user.png' }}"
-        alt="{{ member.knownAs }}"
-        class="card-img-top img-thumbnail"
-      />
+      <img *ngIf="member.gender == 'معلم'" src="{{ member.photoUrl || './assets/user.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+      <img *ngIf="member.gender == 'معلمة'" src="{{ member.photoUrl || './assets/femaleUser.png' }}" alt="{{ member.knownAs }}" class="card-img-top img-thumbnail"/>
+
       <div class="card-body">
         <div>
           <strong>الإقامة</strong>

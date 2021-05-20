@@ -10,25 +10,28 @@
     <label class="control-label ml-2" style="margin-right: 10px">أنا</label>
     <br />
     <label class="radio-inline">
-      <input type="radio" value="male" formControlName="gender" /> معلم
+      <input 
+      type="radio" 
+      value="معلم" 
+      formControlName="gender" /> معلم
     </label>
     <label class="radio-inline">
       <input
         type="radio"
-        value="female"
+        value="معلمة"
         formControlName="gender"
         class="ml-3"
       />
-      طالب
+      معلمة
     </label>
   </div>
-<!-- REAL NAME -->
+  <!-- REAL NAME -->
   <app-text-input
     [formControl]="registerForm.controls['username']"
     [label]="'اسم المستخدم'"
     [class]="'text-right'"
   ></app-text-input>
-<!-- NickName -->
+  <!-- NickName -->
   <app-text-input
     [formControl]="registerForm.controls['knownAs']"
     [label]="'الإسم المستعار'"
@@ -40,7 +43,7 @@
     [label]="'تاريخ الميلاد'"
     [maxDate]="maxDate"
   ></app-date-input>
-<!-- MAJOR -->
+  <!-- MAJOR -->
   <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['major']"
@@ -62,7 +65,7 @@
     <option *ngFor="let count of countryList">{{ count.name }}</option>
   </select>
 
-<!-- Residency Country -->
+  <!-- Residency Country -->
   <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['country']"
@@ -75,9 +78,7 @@
     <option *ngFor="let count of countryList">{{ count.name }}</option>
   </select>
 
-
-
-<!--  CITY -->
+  <!--  CITY -->
   <select
     class="form-control mb-3"
     [formControl]="registerForm.controls['city']"
@@ -86,20 +87,20 @@
     <option value="" disabled selected>إختر المدينة</option>
     <option *ngFor="let city of cities">{{ city }}</option>
   </select>
-<!-- mail -->
+  <!-- mail -->
   <app-text-input
-  [formControl]="registerForm.controls['email']"
-  [label]="'البريد الإلكتروني'"
-  [class]="'text-right'"
-></app-text-input>
+    [formControl]="registerForm.controls['email']"
+    [label]="'البريد الإلكتروني'"
+    [class]="'text-right'"
+  ></app-text-input>
 
-<!-- phone -->
-<app-text-input
-[formControl]="registerForm.controls['phoneNumber']"
-[label]="'رقم الجوال أو الواتساب'"
-[class]="'text-right'"
-></app-text-input>
-<!-- PASSWORD -->
+  <!-- phone -->
+  <app-text-input
+    [formControl]="registerForm.controls['phoneNumber']"
+    [label]="'رقم الجوال أو الواتساب'"
+    [class]="'text-right'"
+  ></app-text-input>
+  <!-- PASSWORD -->
   <app-text-input
     [formControl]="registerForm.controls['password']"
     [label]="'كلمة المرور'"
@@ -114,7 +115,7 @@
     [type]="'password'"
     [class]="'text-right'"
   ></app-text-input>
-<!-- ERROR SUMMARY -->
+  <!-- ERROR SUMMARY -->
   <div class="row" *ngIf="validationErrors.length > 0">
     <ul class="text-danger">
       <li *ngFor="let error of validationErrors">

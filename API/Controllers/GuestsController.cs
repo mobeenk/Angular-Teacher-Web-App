@@ -38,8 +38,8 @@ namespace API.Controllers
             var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             userParams.CurrentUsername = User.GetUsername();
             // this to get the logged in user gender
-            if (string.IsNullOrEmpty(userParams.Gender))
-                userParams.Gender = gender == "male" ? "female" : "male";
+            // if (string.IsNullOrEmpty(userParams.Gender))
+            //     userParams.Gender = gender == "male" ? "female" : "male";
 
             var users = await _unitOfWork.UserRepository.GetMembersAsync(userParams);
 

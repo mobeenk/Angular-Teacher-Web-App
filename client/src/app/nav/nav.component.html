@@ -6,10 +6,9 @@
       *ngIf="accountService.currentUser$ | async as user"
       dropdown
     >
-      <img
-        src="{{ user.photoUrl || './assets/user.png' }}"
-        alt="{{ user.username }}"
-      />
+      <img *ngIf="user.gender == 'معلم'" src="{{ user.photoUrl || './assets/user.png' }}" alt="{{ user.username }}" />
+      <img *ngIf="user.gender == 'معلمة'" src="{{ user.photoUrl || './assets/femaleUser.png' }}" alt="{{ user.username }}" />
+
       <a class="dropdown-toggle text-light ml-2" dropdownToggle
         >مرحباً {{ user.knownAs || user.username | titlecase }}</a
       >
@@ -104,10 +103,15 @@
       <!-- <li class="nav-item">
                 <a class="nav-link" routerLink='/errors'routerLinkActive='active' >الأخطاء</a>
             </li> -->
-            
+            <li  *ngIf="(accountService.currentUser$ | async) === null" class="nav-item">
+              <a class="nav-link" routerLink="/contactus" routerLinkActive="active"
+                >اتصل معنا</a
+              >
+            </li>
             <li  *ngIf="(accountService.currentUser$ | async) === null" class="nav-item">
               <a class="nav-link" routerLink='/guests'routerLinkActive='active' >المدرسين</a>
           </li>
+       
 
     </ul>
     <a tabindex="-7" class="navbar-brand" routerLink="/" routerLinkActive="active"

@@ -44,7 +44,7 @@ namespace API.Data
             // exclude fetching current logged in user & user Admin
             query = query.Where(u => u.UserName != userParams.CurrentUsername && u.UserName != "admin");
             
-            if (userParams.Gender.Equals("female") || userParams.Gender.Equals("male") )
+            if (userParams.Gender.Equals("معلمة") || userParams.Gender.Equals("معلم") )
                 query = query.Where(u => u.Gender == userParams.Gender);
 
             // var minDob = DateTime.Today.AddYears(-userParams.MaxAge - 1);

@@ -3,8 +3,9 @@
 
 <div class="card mb-4">
     <div class="card-img-wrapper">
-    
-        <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top image">
+        <img *ngIf="member.gender == 'معلم'" src="{{member.photoUrl || (   './assets/user.png' )   }}" alt="{{member.knownAs}}" class="card-img-top image">
+        <img *ngIf="member.gender == 'معلمة'" src="{{member.photoUrl || (   './assets/femaleUser.png' )   }}" alt="{{member.knownAs}}" class="card-img-top image">
+        <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top image"> -->
         <img 
             style=" position: absolute;    top: 2px;    right: 2px;" 
             src="./assets/svg-country-flags/png100px/{{member.country}}.png" 

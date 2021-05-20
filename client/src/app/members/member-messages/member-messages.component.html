@@ -13,8 +13,9 @@
             <li *ngFor="let message of (messageService.messageThread$ | async)">
                 <div>
                     <span class="chat-img float-right">
-                        <img class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}" 
-                            alt="{{message.senderUsername}}">
+                        <img  class="rounded-circle" src="{{message.senderPhotoUrl || './assets/user.png'}}"  alt="{{message.senderUsername}}">
+                        <!-- <img *ngIf="message.gender == 'معلمة'"  class="rounded-circle" src="{{message.senderPhotoUrl || './assets/femaleUser.png'}}"  alt="{{message.senderUsername}}"> -->
+
                     </span>
                     <div class="chat-body">
                         <div class="header">

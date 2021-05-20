@@ -22,7 +22,7 @@ export class GuestsComponent implements OnInit {
   pagination: Pagination;
   guestParams: GuestParams;
   user: User;
-  genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' },{value: 'الكل', display: 'الكل'}];
+  genderList = [{ value: 'معلم', display: 'معلم' }, { value: 'معلمة', display: 'معلمة' },{value: 'الكل', display: 'الكل'}];
   // control page size menu
   pageSizeList = [{ value: 6, display: '6' }, { value: 12, display: '12' },{value: 18, display: '18'},{value: 24, display: '24'}];
   // countryList =  [
