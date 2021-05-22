@@ -6,12 +6,13 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #00357b;
+    color: #78acf0;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
 #footer {
-    background: #495cca !important;
+    /* background: #324bda !important; */
+    background-image: linear-gradient(rgb(0, 102, 255), rgb(79, 151, 218), rgb(27, 142, 236));
 
 }
 #footer h5{

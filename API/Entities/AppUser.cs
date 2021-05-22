@@ -30,9 +30,10 @@ namespace API.Entities
 //  phonenumber & email already exists in Micorsoft Identity
         public string Major { get; set; }
         public bool IsVerified { get; set; } = false;
+        public DateTime VerifiedDate { get; set; } = DateTime.Now.Date;
+        public int Balance { get; set; }= 0;
         // overrrided the attribute on asp identity to match MemberDto due to different datatypes
         public new string  PhoneNumber { get; set; }
-
          public string Nationality { get; set; }
     
 

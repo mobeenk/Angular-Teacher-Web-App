@@ -8,7 +8,7 @@ export class GuestParams {
     // minAge = 18;
     // maxAge = 99;
     pageNumber = 1;
-    pageSize = 6;
+    pageSize = 24;
     orderBy = 'lastActive';
 
     country: string;

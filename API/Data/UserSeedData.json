@@ -1,7 +1,7 @@
 [
   {
     "UserName": "Watts",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1984-12-03",
     "KnownAs": "Watts",
     "Created": "2019-09-15",
@@ -24,7 +24,7 @@
   },
   {
     "UserName": "Macdonald",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1985-05-26",
     "KnownAs": "Macdonald",
     "Created": "2020-04-08",
@@ -47,7 +47,7 @@
   },
   {
     "UserName": "Fry",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1953-03-24",
     "KnownAs": "Fry",
     "Created": "2019-10-25",
@@ -70,7 +70,7 @@
   },
   {
     "UserName": "Newton",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1995-02-18",
     "KnownAs": "Newton",
     "Created": "2019-03-18",
@@ -93,7 +93,7 @@
   },
   {
     "UserName": "Stafford",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1991-04-29",
     "KnownAs": "Stafford",
     "Created": "2019-05-18",
@@ -116,7 +116,7 @@
   },
   {
     "UserName": "Carpenter",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1969-07-21",
     "KnownAs": "Carpenter",
     "Created": "2019-04-18",
@@ -139,7 +139,7 @@
   },
   {
     "UserName": "Parsons",
-    "Gender": "male",
+    "Gender": "معلم",
     "DateOfBirth": "1971-04-22",
     "KnownAs": "Parsons",
     "Created": "2019-06-08",
@@ -162,7 +162,7 @@
   },
   {
     "UserName": "Hale",
-    "Gender": "male",
+    "Gender": "طالب",
     "DateOfBirth": "1953-03-24",
     "KnownAs": "Hale",
     "Created": "2019-04-28",
@@ -185,7 +185,7 @@
   },
   {
     "UserName": "Leah",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1978-02-09",
     "KnownAs": "Leah",
     "Created": "2019-07-28",
@@ -208,7 +208,7 @@
   },
   {
     "UserName": "Shelley",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1993-07-31",
     "KnownAs": "Shelley",
     "Created": "2019-07-10",
@@ -231,7 +231,7 @@
   },
   {
     "UserName": "Bertie",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1987-04-14",
     "KnownAs": "Bertie",
     "Created": "2020-04-11",
@@ -254,7 +254,7 @@
   },
   {
     "UserName": "Hallie",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1982-02-13",
     "KnownAs": "Hallie",
     "Created": "2020-01-11",
@@ -277,7 +277,7 @@
   },
   {
     "UserName": "Cara",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1955-04-02",
     "KnownAs": "Cara",
     "Created": "2020-06-23",
@@ -300,7 +300,7 @@
   },
   {
     "UserName": "Cora",
-    "Gender": "female",
+    "Gender": "معلمة",
     "DateOfBirth": "1954-02-15",
     "KnownAs": "Cora",
     "Created": "2019-10-01",
@@ -323,7 +323,7 @@
   },
   {
     "UserName": "Sybil",
-    "Gender": "female",
+    "Gender": "طالبة",
     "DateOfBirth": "1992-01-05",
     "KnownAs": "Sybil",
     "Created": "2019-03-17",

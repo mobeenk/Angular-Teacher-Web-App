@@ -19,8 +19,14 @@ export class UserManagementComponent implements OnInit {
   memberCache = new Map();
   pageSizeList = [{ value: 6, display: '6' }
   , { value: 10, display: '10' },
-  {value: 18, display: '18'},
-  {value: 24, display: '24'}];
+    {value: 18, display: '18'},
+    {value: 24, display: '24'}   ];
+
+    genderList = [{ value: "معلم", display: 'معلم' }
+    , { value: "معلمة", display: 'معلمة' },
+      {value: "طالب", display: 'طالب'},
+      {value: "الكل", display: 'الكل'},
+      {value: "طالبة", display: 'طالبة'}   ];
 
   searchUser: string;
   constructor(private adminService: AdminService, private modalService: BsModalService ,private toastr: ToastrService)
@@ -41,9 +47,9 @@ export class UserManagementComponent implements OnInit {
   // }
   pageNumber = 1;
   pageSize = 10;
-
-  getUsersWithRoles(searchUser?: string) {
-    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize,searchUser)
+  gender : string;
+  getUsersWithRoles(searchUser?: string, gender?: string) {
+    this.adminService.getUsersWithRoles(this.pageNumber,this.pageSize,searchUser, this.gender)
     .subscribe(response => {
       this.users = response.result;
       this.pagination = response.pagination;
@@ -83,6 +89,13 @@ export class UserManagementComponent implements OnInit {
         }
     )
   }
+  verifyUser(username: string){
+    this.adminService.verifyUser(username).subscribe(
+        (data)=>{
+          this.toastr.success('done')
+        }
+    );
+  }
   openRolesModal(user: User) {
     // this is the Modal Configuration
     const config = {
@@ -94,11 +107,11 @@ export class UserManagementComponent implements OnInit {
     }
     // modal reference from Dependecay Injection we added the Modal Class
     this.bsModalRef = this.modalService.show(RolesModalComponent, config);
-    
-    // here we pass content to @Input in the modal which is updateSelectedRoles
+    // here we pass content to @Input in the modal property which is updateSelectedRoles
     this.bsModalRef.content.updateSelectedRoles.subscribe(values => {
       const rolesToUpdate = {
-        roles: [...values.filter(el => el.checked === true).map(el => el.name)]
+        roles: [...values.filter( el => el.checked === true)
+          .map(el => el.name)]
       };
       if (rolesToUpdate) {
         this.adminService.updateUserRoles(user.username, rolesToUpdate.roles).subscribe(() => {

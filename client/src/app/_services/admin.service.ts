@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -19,10 +19,12 @@ export class AdminService {
   //   return this.http.get<Partial<User[]>>(this.baseUrl + 'admin/users-with-roles');
   // }
  
-  getUsersWithRoles(pageNumber, pageSize,searchUser?) {
+  getUsersWithRoles(pageNumber, pageSize, searchUser?, gender?) {
     let params = getPaginationHeaders(pageNumber, pageSize);
     if(searchUser)
       params = params.append('username', searchUser);
+    if(gender)
+      params = params.append('gender', gender);
     return getPaginatedResult<User[]>(this.baseUrl + 'admin/users-with-roles', params, this.http);
   }
 
@@ -34,6 +36,12 @@ export class AdminService {
   }
   unBanUser(username: string){
     return this.http.post(this.baseUrl+'admin/unban-user/'+ username,{} ,{observe: 'response'} );
+  }
+  verifyUser(username: string, flag?: boolean){
+    // let params = new HttpParams();
+    // if (flag)
+    //   params = params.append('flag', true);
+    return this.http.post(this.baseUrl+'admin/verify-user/'+ username,{} );
   }
 // photos approval
   getPhotosForApproval(){

@@ -64,7 +64,7 @@ namespace API.Data
             if(userParams.Major != null && userParams.Major != "الكل")
                 query = query.Where(m => m.Major == userParams.Major);
             // by default it's false unless passing parameter as true
-            query = query.Where(iv => iv.IsVerified == userParams.isVerified);
+            // query = query.Where(iv => iv.IsVerified == userParams.isVerified);
 
 
 

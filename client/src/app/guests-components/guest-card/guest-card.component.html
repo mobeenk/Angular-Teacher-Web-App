@@ -12,6 +12,12 @@
             width="30px" height="20px"
             title=" الإقامة: {{member.country}} - {{member.city}}"
         />
+        <img *ngIf="member.isVerified" style=" position: absolute;bottom: 2px;right:2px;
+        "src="./assets/verified-account.png" width="30px" height="30px"
+         title="موثق"/>
+         <!-- <img *ngIf="!member.isVerified" style=" position: absolute;bottom: 2px;right:2px;"src="./assets/not-verified.png" width="30px" height="30px"
+         title="موثق"/> -->
+
         <div  style=" position: absolute; top: 2px; left: 2px;" >
             <span title="معلم"><i *ngIf="member.gender == 'معلم'" class="fa fa-mars" ></i></span>
             <span title="معلمة"><i *ngIf="member.gender == 'معلمة'" class="fa fa-venus" ></i></span>

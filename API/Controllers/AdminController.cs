@@ -67,7 +67,6 @@ namespace API.Controllers
         }
         public async Task<PagedList<AdminUsersDto>> GetAdminUsers(UserParams userparams)
         {
- 
                 var query =  _userManager.Users.AsQueryable()
                 .Include(r => r.UserRoles)
                 .OrderBy(u => u.UserName)
@@ -75,6 +74,9 @@ namespace API.Controllers
             // if we passed a username to search from angular
             if (userparams.Username !=null )
                 query = query.Where(u => u.Username == userparams.Username );
+
+            if (userparams.Gender !=null && userparams.Gender != "الكل" )
+                query = query.Where(u => u.Gender == userparams.Gender );
 
             return await PagedList<AdminUsersDto>.CreateAsync(
                  query, userparams.PageNumber, userparams.PageSize);
@@ -199,6 +201,15 @@ namespace API.Controllers
        
             var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
             user.LockoutEnd = DateTimeOffset.Now;
+            return Ok();
+        }
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("verify-user/{username}")]
+        public async Task<ActionResult> VerifyUser(string username, Boolean flag = true )
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
+            user.IsVerified = flag;
+            user.VerifiedDate = DateTime.Now.AddMonths(6);
             return Ok();
         }
     }

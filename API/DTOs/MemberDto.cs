@@ -24,6 +24,8 @@ namespace API.DTOs
 
         public string PhoneNumber { get; set; }
         public bool IsVerified { get; set; }
+        public DateTime VerifiedDate { get; set; }
+         public int Balance { get; set; }=0;
         public string Major { get; set; }
         public string Nationality { get; set; }
     }

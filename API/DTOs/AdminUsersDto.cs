@@ -8,5 +8,6 @@ namespace API.DTOs
         public int Id { get; set; }
         public string Username { get; set; }
         public List<string> Roles { get; set; }
+        public string Gender { get; set; }
     }
 }

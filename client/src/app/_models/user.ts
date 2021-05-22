@@ -8,5 +8,6 @@ export interface User {
 
     email: string;
     phoneNumber: number;
+    isVerified: string;
     // country: string;
 }

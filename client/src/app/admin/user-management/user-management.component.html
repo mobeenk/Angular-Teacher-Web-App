@@ -4,7 +4,21 @@
 <h4><strong>Search User</strong></h4>
 <div class="row">
     <input type="text" placeholder="enter username" class="form-control col-md-4 mr-2 ml-2"  [(ngModel)]="searchUser" />
-    <button (click)="setSearch()" class="btn btn-primary col-md-1">Search</button>
+    <button type="submit" (click)="setSearch()" class="btn btn-primary col-md-1">Search</button>
+
+
+    <select
+        name="pageSize"
+        style="width: 95px"
+        [(ngModel)]="gender"
+        class="form-control ml-2"
+        (change)="getUsersWithRoles()"
+    >
+        <option disabled></option>
+        <option *ngFor="let gender of genderList" [value]="gender.value">
+            {{ gender.display }}
+        </option>
+    </select>
 </div>
 
     <div class="card-body" >
@@ -17,7 +31,7 @@
 
                 </tr>
                 <tr *ngFor="let user of users">
-                    <td>{{user.username}}</td>
+                    <td>{{user.username}} - ({{user.gender}})</td>
                     <td>{{user.roles}}</td>
                     <td>
                         <button (click)="openRolesModal(user)" class="btn btn-info mr-1" title="تعديل الصلاحيات"> 
@@ -29,6 +43,9 @@
                         </button>
 
                         <button (click)="unBanUser(user.username)" class="btn btn-success mr-1" title="إلغاء الحظر">
+                            <i class="fa fa-check-circle"></i>
+                        </button>
+                        <button (click)="verifyUser(user.username,true)" class="btn btn-info mr-1" title="إلغاء الحظر">
                             <i class="fa fa-check-circle"></i>
                         </button>
                     </td>
