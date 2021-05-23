@@ -1,5 +1,8 @@
 <div class="text-center mt-3">
-  <h2>نتائج البحث - {{ pagination?.totalItems }} تم العثور عليه</h2>
+  <h1>نتائج البحث - {{ pagination?.totalItems }} تم العثور عليه</h1>
+  <h2 class="text-right" *ngIf="guestParams.country != 'الكل'">
+   مدرس خصوصي في / {{guestParams.country}} /  {{guestParams.city}} / {{guestParams.major}}
+  </h2>
 </div>
 
 <div class="container mt-3" dir="rtl">

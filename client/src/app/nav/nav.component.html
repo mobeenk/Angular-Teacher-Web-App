@@ -6,7 +6,7 @@
       *ngIf="accountService.currentUser$ | async as user"
       dropdown
     >
-      <img *ngIf="user.gender == 'معلم'" src="{{ user.photoUrl || './assets/user.png' }}" alt="{{ user.username }}" />
+      <img *ngIf="user.gender == 'معلم '" src="{{ user.photoUrl || './assets/user.png' }}" alt="{{ user.username }}" />
       <img *ngIf="user.gender == 'معلمة'" src="{{ user.photoUrl || './assets/femaleUser.png' }}" alt="{{ user.username }}" />
 
       <a class="dropdown-toggle text-light ml-2" dropdownToggle

@@ -8,8 +8,10 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { GuestParams } from '../../_models/guestParams';
+import * as EventEmitter from 'events';
+import { SharedService } from 'src/app/_services/shared.service';
 
 @Component({
   selector: 'app-guests',
@@ -17,6 +19,7 @@ import { GuestParams } from '../../_models/guestParams';
   styleUrls: ['./guests.component.css']
 })
 export class GuestsComponent implements OnInit {
+ @Output() footer = new EventEmitter();
 
   members: Member[];
   pagination: Pagination;
@@ -25,30 +28,6 @@ export class GuestsComponent implements OnInit {
   genderList = [{ value: 'معلم', display: 'معلم' }, { value: 'معلمة', display: 'معلمة' },{value: 'الكل', display: 'الكل'}];
   // control page size menu
   pageSizeList = [{ value: 6, display: '6' }, { value: 12, display: '12' },{value: 18, display: '18'},{value: 24, display: '24'}];
-  // countryList =  [
-  //   { value: 'السعودية', display: 'السعودية' },
-  //   { value: 'أمريكا', display: 'أمريكا' },
-  //   { value: 'كندا', display: 'كندا' },
-  //   { value: 'أمريكا الجنوبية', display: '' },
-  //   { value: 'أوروبا', display: 'أوروبا' },
-  //   { value: 'استراليا', display: 'استراليا' },
-  //   { value: 'مصر', display: 'مصر' },
-  //   { value: 'الكويت', display: 'الكويت' },
-  //   { value: 'الإمارات', display: 'الإمارات' },
-  //   { value: 'البحرين', display: 'البحرين' },
-  //   { value: 'عمان', display: 'عمان' },
-  //   { value: 'اليمن', display: 'اليمن' },
-  //   { value: 'سوريا', display: 'سوريا' },
-  //   { value: 'لبنان', display: 'لبنان' },
-  //   { value: 'الأردن', display: 'الأردن' },
-  //   { value: 'العراق', display: 'العراق' },
-  //   { value: 'فلسطين', display: 'فلسطين' },
-  //   { value: 'الجزائر', display: 'الجزائر' },
-  //   { value: 'المغرب', display: 'المغرب' },
-  //   { value: 'السودان', display: 'السودان' },
-  //   { value: 'ليبيا', display: 'ليبيا'},
-  //   { value: 'تونس', display: 'تونس'}
-  // ];
   countryList: Array<any> = [
     { name: 'الكل', cities: ['الكل'] },
     { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة', 'نجران'] },
@@ -81,9 +60,10 @@ export class GuestsComponent implements OnInit {
   majors: Array<string> = ['فيزياء', 'كيمياء', 'رياضيات', 'برمجة', 'قرآن', 'فرنسي', 'إنجليزي', 'مدرس جامعي', 'دكتور جامعي',
     'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد','الكل']
     
-  constructor(private memberService: MembersService) {
+  constructor(private memberService: MembersService, private sharedService: SharedService) {
     // this.userParams = this.memberService.getUserParams();
     this.guestParams = new GuestParams();
+    this.sharedService.footerVal = "some val";
   }
 
   ngOnInit(): void {
@@ -96,6 +76,8 @@ export class GuestsComponent implements OnInit {
       this.members = response.result;
       this.pagination = response.pagination;
     })
+    this.addValue();
+   
   }
 
   resetFilters() {
@@ -113,4 +95,16 @@ export class GuestsComponent implements OnInit {
     this.cities = this.countryList.find(con => con.name == country).cities;
     this.guestParams.city = this.cities[0];
   }
+
+
+  footerVal: string;
+  // comp2val: string;
+  ngAfterContentChecked() {
+    // this.comp2val = this.sharedService.footerVal;
+  }
+  addValue() {
+    this.sharedService.updateFooterVal('مدرس خصوصي في /'+this.guestParams.country+
+    '/'+this.guestParams.country+'/'+this.guestParams.city+'/'+this.guestParams.major);
+  }
+
 }

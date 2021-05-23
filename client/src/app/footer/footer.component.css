@@ -12,12 +12,16 @@ section .section-title {
 }
 #footer {
     /* background: #324bda !important; */
-    background-image: linear-gradient(rgb(0, 102, 255), rgb(79, 151, 218), rgb(27, 142, 236));
+    background-image: linear-gradient(rgb(0, 102, 255), rgb(16, 113, 204), rgb(27, 41, 236));
 
 }
+#footer h2{
+    font-size:  15px;
+    color:#fcf8f8;
+}
 #footer h5{
-	padding-left: 10px;
-    border-left: 3px solid #eeeeee;
+	padding-right: 15px;
+    border-right: 3px solid #eeeeee;
     padding-bottom: 6px;
     margin-bottom: 20px;
     color:#ffffff;
@@ -69,9 +73,9 @@ section .section-title {
 
 @media (max-width:767px){
 	#footer h5 {
-    padding-left: 0;
-    border-left: transparent;
-    padding-bottom: 0px;
-    margin-bottom: 10px;
-}
+        padding-left: 0;
+        border-right: transparent;
+        padding-bottom: 0px;
+        margin-bottom: 10px;
+    }
 }

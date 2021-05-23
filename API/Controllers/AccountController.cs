@@ -80,7 +80,7 @@ namespace API.Controllers
     {
         var user = await _userManager.Users
             .Include(p => p.Photos)
-            .SingleOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            .SingleOrDefaultAsync(x =>(   x.UserName  == loginDto.Username.ToLower() || x.Email == loginDto.Username.ToLower()   ) );
         //  var tryaccess = await _userManager.
         if (user == null)
             return Unauthorized("Invalid username");
@@ -100,7 +100,6 @@ namespace API.Controllers
                  return Unauthorized("تم تعليق الحساب");
              }
              else{
-  
                   return Unauthorized("اسم المستخدم أو كلمة المرور خطأ");
              }
             //  
