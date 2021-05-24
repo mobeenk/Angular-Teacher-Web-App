@@ -12,6 +12,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { GuestParams } from '../../_models/guestParams';
 import * as EventEmitter from 'events';
 import { SharedService } from 'src/app/_services/shared.service';
+import { SO } from 'src/app/_models/staticObjects';
 
 @Component({
   selector: 'app-guests',
@@ -25,40 +26,15 @@ export class GuestsComponent implements OnInit {
   pagination: Pagination;
   guestParams: GuestParams;
   user: User;
-  genderList = [{ value: 'معلم', display: 'معلم' }, { value: 'معلمة', display: 'معلمة' },{value: 'الكل', display: 'الكل'}];
-  // control page size menu
-  pageSizeList = [{ value: 6, display: '6' }, { value: 12, display: '12' },{value: 18, display: '18'},{value: 24, display: '24'}];
-  countryList: Array<any> = [
-    { name: 'الكل', cities: ['الكل'] },
-    { name: 'السعودية', cities: ['الدمام', 'الرياض', 'جدة', 'نجران'] },
-    { name: 'أمريكا', cities: ['واشنطن', 'نيويورك', 'أخرى'] },
-    { name: 'كندا', cities: ['تورونتو', 'أخرى'] },
-    { name: 'أمريكا الجنوبية', cities: ['البرازيل', 'أخرى'] },
-    { name: 'أوروبا', cities: ['السويد', 'ألمانيا', 'فرنسا', 'إسبانيا', 'أخرى'] },
-    { name: 'استراليا', cities: ['سيدني', 'أخرى'] },
-    { name: 'مصر', cities: ['القاهرة', 'أخرى'] },
-    { name: 'الكويت', cities: ['الكويت', 'أخرى'] },
-    { name: 'الإمارات', cities: ['الشارقة', 'دبي', 'أبو ظبي', 'أخرى'] },
-    { name: 'البحرين', cities: ['المنامة', 'أخرى'] },
-    { name: 'عمان', cities: ['مسقط', 'أخرى'] },
-    { name: 'اليمن', cities: ['صنعاء', 'أخرى'] },
-    { name: 'سوريا', cities: ['حلب', 'دمشق', 'حمص', 'حماة', 'دير الزور', 'أخرى'] },
-    { name: 'لبنان', cities: ['طرابلس', 'بيروت', 'أخرى'] },
-    { name: 'الأردن', cities: ['عمان', 'أخرى'] },
-    { name: 'العراق', cities: ['بغداد', 'أخرى'] },
-    { name: 'فلسطين', cities: ['القدس', 'أخرى'] },
-    { name: 'الجزائر', cities: ['الجزائر', 'أخرى'] },
-    { name: 'المغرب', cities: ['الدار البيضاء', 'أخرى'] },
-    { name: 'السودان', cities: ['الخرطوم', 'أخرى'] },
-    { name: 'ليبيا', cities: ['أخرى'] },
-    { name: 'تونس', cities: ['أخرى', 'تونس']
   
-  }
-  ];
+  genderList = SO.genderList;
+  pageSizeList = SO.pageSizeList;
+  countryList: Array<any> = SO.countryList;
   cities: Array<any>;
+  majors: Array<string> = SO.majors;
 
-  majors: Array<string> = ['فيزياء', 'كيمياء', 'رياضيات', 'برمجة', 'قرآن', 'فرنسي', 'إنجليزي', 'مدرس جامعي', 'دكتور جامعي',
-    'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد','الكل']
+
+
     
   constructor(private memberService: MembersService, private sharedService: SharedService) {
     // this.userParams = this.memberService.getUserParams();
@@ -97,14 +73,9 @@ export class GuestsComponent implements OnInit {
   }
 
 
-  footerVal: string;
-  // comp2val: string;
-  ngAfterContentChecked() {
-    // this.comp2val = this.sharedService.footerVal;
-  }
   addValue() {
     this.sharedService.updateFooterVal('مدرس خصوصي في /'+this.guestParams.country+
-    '/'+this.guestParams.country+'/'+this.guestParams.city+'/'+this.guestParams.major);
+    '/'+this.guestParams.city+'/'+this.guestParams.gender+'/'+this.guestParams.major);
   }
 
 }

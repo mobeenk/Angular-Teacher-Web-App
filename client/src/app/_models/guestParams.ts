@@ -16,9 +16,9 @@ export class GuestParams {
     major: string;
     constructor() {
         this.gender =  'الكل';
-        this.country = 'الكل'
-        this.city = 'الكل'
-        this.major = 'الكل'
+        this.country = 'جميع البلدان'
+        this.city = 'جميع المدن'
+        this.major = 'جميع التخصصات'
      
     }
     

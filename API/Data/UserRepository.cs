@@ -55,13 +55,13 @@ namespace API.Data
 
             // filter country only if we passed a URL paramater
             // all parameter if passed from userParams.ts then dont filter countries
-            if(userParams.Country != null && userParams.Country != "الكل" )
+            if(userParams.Country != null && userParams.Country != "جميع البلدان" )
                 query = query.Where(u => u.Country == userParams.Country);
             // filter by city
-            if(userParams.City != null && userParams.City != "الكل" )
+            if(userParams.City != null && userParams.City != "جميع المدن" )
                 query = query.Where(c => c.City == userParams.City);
             // major filter
-            if(userParams.Major != null && userParams.Major != "الكل")
+            if(userParams.Major != null && userParams.Major != "جميع التخصصات")
                 query = query.Where(m => m.Major == userParams.Major);
             // by default it's false unless passing parameter as true
             // query = query.Where(iv => iv.IsVerified == userParams.isVerified);

@@ -18,9 +18,9 @@ export class UserParams {
         
         // initial values to be passed in URL to show all since it exclude condition in UserRepository GetMembers filter
         this.gender =  'الكل';
-        this.country = 'الكل'
-        this.city = 'الكل'
-        this.major = 'الكل'
+        this.country = 'جميع البلدان'
+        this.city = 'جميع المدن'
+        this.major = 'جميع التخصصات'
         // this.pageSize =5;
     }
 }
