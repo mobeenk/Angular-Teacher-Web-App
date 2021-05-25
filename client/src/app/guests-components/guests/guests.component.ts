@@ -13,6 +13,7 @@ import { GuestParams } from '../../_models/guestParams';
 import * as EventEmitter from 'events';
 import { SharedService } from 'src/app/_services/shared.service';
 import { SO } from 'src/app/_models/staticObjects';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-guests',
@@ -36,14 +37,19 @@ export class GuestsComponent implements OnInit {
 
 
     
-  constructor(private memberService: MembersService, private sharedService: SharedService) {
+  constructor(private memberService: MembersService, private sharedService: SharedService, private titleService: Title) {
     // this.userParams = this.memberService.getUserParams();
     this.guestParams = new GuestParams();
-    this.sharedService.footerVal = "some val";
+    // this.sharedService.footerVal = "some val";
+    
   }
 
   ngOnInit(): void {
     this.loadMembers();
+    this.setTitle("البحث عن مدرسين في أنحاء العالم");
+  }
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
   loadMembers() {
@@ -52,6 +58,7 @@ export class GuestsComponent implements OnInit {
       this.members = response.result;
       this.pagination = response.pagination;
     })
+    // this calls on the shared service to send filter data from main page to footer and title
     this.addValue();
    
   }
@@ -74,8 +81,10 @@ export class GuestsComponent implements OnInit {
 
 
   addValue() {
-    this.sharedService.updateFooterVal('مدرس خصوصي في /'+this.guestParams.country+
-    '/'+this.guestParams.city+'/'+this.guestParams.gender+'/'+this.guestParams.major);
+   const searchString = 'مدرس خصوصي في /'+this.guestParams.country+
+    '/'+this.guestParams.city+'/'+this.guestParams.gender+'/'+this.guestParams.major;
+    this.sharedService.updateFooterVal(searchString);
+    this.setTitle(searchString);
   }
 
 }

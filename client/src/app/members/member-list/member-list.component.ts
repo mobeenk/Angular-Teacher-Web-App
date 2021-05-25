@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 import { SharedService } from 'src/app/_services/shared.service';
 import { SO } from 'src/app/_models/staticObjects';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-member-list',
@@ -20,16 +21,15 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   userParams: UserParams;
   user: User;
-  // genderList = [{ value: 'male', display: 'Males' }, { value: 'female', display: 'Females' }, { value: 'الكل', display: 'الكل' }];
+
   genderList = SO.genderList;
   pageSizeList = SO.pageSizeList;
   countryList: Array<any> = SO.countryList;
   cities: Array<any>;
   majors: Array<string> = SO.majors;
-  // ['فيزياء', 'كيمياء', 'رياضيات', 'برمجة', 'قرآن', 'فرنسي', 'إنجليزي', 'مدرس جامعي', 'دكتور جامعي',
-  //   'هندسة ', 'طب', 'تمريض', 'باحث', 'تجارة واقتصاد','جميع التخصصات']
+
     
-  constructor(private memberService: MembersService, private sharedService: SharedService) {
+  constructor(private memberService: MembersService, private sharedService: SharedService, private titleService: Title) {
     this.userParams = this.memberService.getUserParams();
     // this.userParams = new UserParams();
 
@@ -38,7 +38,7 @@ export class MemberListComponent implements OnInit {
   ngOnInit(): void {
     this.resetFilters();
     this.loadMembers();
-    
+    this.setTitle("البحث عن مدرسين في أنحاء العالم");
   }
 
   loadMembers() {
@@ -70,8 +70,13 @@ export class MemberListComponent implements OnInit {
     this.cities = this.countryList.find(con => con.name == country).cities;
     this.userParams.city = this.cities[0];
   }
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
+  }
   addValue() {
-    this.sharedService.updateFooterVal('مدرس خصوصي في /'+this.userParams.country+
-    '/'+this.userParams.city+'/'+this.userParams.gender+'/'+this.userParams.major);
+    const searchString = 'مدرس خصوصي في /'+this.userParams.country+
+    '/'+this.userParams.city+'/'+this.userParams.gender+'/'+this.userParams.major;
+    this.sharedService.updateFooterVal(searchString);
+    this.setTitle(searchString);
   }
 }
