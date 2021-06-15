@@ -14,5 +14,6 @@ namespace API.DTOs
         public string Major { get; set; }
         
          public string Nationality { get; set; }
+         public bool AccountStatus { get; set; }
     }
 }

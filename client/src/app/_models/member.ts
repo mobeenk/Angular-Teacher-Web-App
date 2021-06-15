@@ -27,6 +27,7 @@ export interface Member {
 
     major: string;
     nationality: string;
+    accountStatus: number;
     // countryEn:string;
   }
   

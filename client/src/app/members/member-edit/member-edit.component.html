@@ -81,7 +81,8 @@
           </div>
 
           <div class="form-group row">
-            <div class="form-group col-md-6">
+            <!-- البريد الاكلتروني -->
+            <div class="form-group col-md-5">
               <label class="form-check-label" for="email"
                 >البريد الإلكتروني:
               </label>
@@ -92,8 +93,8 @@
                 class="form-control mt-2"
               />
             </div>
-
-            <div class="form-group col-md-6">
+<!-- رقم التواصل -->
+            <div class="form-group col-md-4">
               <label class="form-check-label" for="phoneNumber">
                 رقم التواصل
               </label>
@@ -104,6 +105,22 @@
                 class="form-control mt-2"
               />
             </div>
+
+<!-- suspend account goes here -->
+            <!-- accountStatus -->
+            <div *ngIf="member.gender != 'طالب' && member.gender !='طالبة'" class="form-group col-md-3">
+              <label class="text-danger" for="major"> حالة الحساب </label>
+            <select
+              class="form-control"
+              [(ngModel)]="member.accountStatus"
+              dir="rtl"
+              name="accountStatus"
+            >
+              <option value="" disabled selected>إختر </option>
+              <option *ngFor="let opt of suspendOptions"  [ngValue]="opt.key">{{opt.value }}</option>
+            </select>
+          </div>
+
           </div>
 
           <h4>معلومات عني</h4>

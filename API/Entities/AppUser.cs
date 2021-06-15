@@ -34,7 +34,10 @@ namespace API.Entities
         public int Balance { get; set; }= 0;
         // overrrided the attribute on asp identity to match MemberDto due to different datatypes
         public new string  PhoneNumber { get; set; }
-         public string Nationality { get; set; }
+        public string Nationality { get; set; }
+        //account is initially active
+        public bool AccountStatus { get; set; } = true;
+
     
 
     }

@@ -42,7 +42,10 @@ namespace API.Data
         {
             var query = _context.Users.AsQueryable();
             // exclude fetching current logged in user & user Admin
-            query = query.Where(u => u.UserName != userParams.CurrentUsername && u.UserName != "admin" && u.Gender != "طالب" && u.Gender != "طالبة");
+            query = query.Where(u => u.UserName != userParams.CurrentUsername
+             && u.UserName != "admin" && u.Gender != "طالب" && u.Gender != "طالبة"
+             && u.AccountStatus != false
+             );
             
             if (userParams.Gender.Equals("معلمة") || userParams.Gender.Equals("معلم") )
                 query = query.Where(u => u.Gender == userParams.Gender);

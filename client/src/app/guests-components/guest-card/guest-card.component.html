@@ -7,17 +7,17 @@
         <img *ngIf="member.gender == 'معلمة'" src="{{member.photoUrl || (   './assets/femaleUser.png' )   }}" alt="{{member.knownAs}}" class="card-img-top image">
         <!-- <img src="{{member.photoUrl || './assets/user.png'}}" alt="{{member.knownAs}}" class="card-img-top image"> -->
         <img 
-            style=" position: absolute;    top: 2px;    right: 2px;" 
+            style=" position: absolute;    top: 2px;    right: 2px;" alt="country"
             src="./assets/svg-country-flags/png100px/{{member.country}}.png" 
             width="30px" height="20px"
             title=" الإقامة: {{member.country}} - {{member.city}}"
         />
         <img *ngIf="member.isVerified" style=" position: absolute;bottom: 0px;right:2px;
-        "src="./assets/verified-account.png" width="30px" height="30px"
+        "src="./assets/verified-account.png" width="30px" height="30px" alt="verified"
          title="موثق"/>
 
-         <img *ngIf="member.isVerified" style=" position: absolute;bottom: 2px;left:2px;
-         "src="./assets/star.png" width="25px" height="25px"
+         <img *ngIf="member.isVerified && !verifiedDateIsExpired()" style=" position: absolute;bottom: 2px;left:2px;
+         "src="./assets/star.png" width="25px" height="25px" alt="starred"
           title="سدد عمولة الموقع"/>
          <!-- <img *ngIf="!member.isVerified" style=" position: absolute;bottom: 2px;right:2px;"src="./assets/not-verified.png" width="30px" height="30px"
          title="موثق"/> -->
