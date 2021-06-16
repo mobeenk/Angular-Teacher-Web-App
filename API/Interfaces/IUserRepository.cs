@@ -18,5 +18,6 @@ namespace API.Interfaces
         Task<string> GetUserCountry(string username);
 
         Task<AppUser> GetUserByPhotoId(int photoId);
+        Task<int> GetUserBalance(string username);
     }
 }

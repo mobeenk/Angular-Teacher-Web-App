@@ -26,9 +26,10 @@ export class GuestCardComponent implements OnInit {
     //   else{
     //      member.countryEn = map.get('السعودية')
     //   }
+    // console.log(this.member.balance)
   }
   verifiedDateIsExpired(){
-   
+ 
     this.expired = false;
     if( new Date(this.member.verifiedDate ).getTime()  > Date.now()  )  {
       this.expired = false;

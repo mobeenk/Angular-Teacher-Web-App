@@ -75,4 +75,8 @@ export class AccountService {
 
   }
 
+  updateUserBalance(username: string) {
+    return this.http.put(this.baseUrl + 'guests/'+username,{});
+  }
+
 }

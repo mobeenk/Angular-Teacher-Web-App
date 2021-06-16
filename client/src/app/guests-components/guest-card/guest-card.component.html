@@ -12,20 +12,21 @@
             width="30px" height="20px"
             title=" الإقامة: {{member.country}} - {{member.city}}"
         />
-        <img *ngIf="member.isVerified" style=" position: absolute;bottom: 0px;right:2px;
+        <img *ngIf="member.isVerified && !verifiedDateIsExpired()" style=" position: absolute;bottom: 0px;right:2px;
         "src="./assets/verified-account.png" width="30px" height="30px" alt="verified"
          title="موثق"/>
 
-         <img *ngIf="member.isVerified && !verifiedDateIsExpired()" style=" position: absolute;bottom: 2px;left:2px;
+         <img *ngIf="(member.balance) > 0" style=" position: absolute;bottom: 2px;left:2px;
          "src="./assets/star.png" width="25px" height="25px" alt="starred"
-          title="سدد عمولة الموقع"/>
-         <!-- <img *ngIf="!member.isVerified" style=" position: absolute;bottom: 2px;right:2px;"src="./assets/not-verified.png" width="30px" height="30px"
-         title="موثق"/> -->
+           title="member.balance" />
+         
+            <!-- title="سدد عمولة الموقع"/> -->
 
         <div  style=" position: absolute; top: 2px; left: 2px;" >
             <span title="معلم"><i *ngIf="member.gender == 'معلم'" class="fa fa-mars" ></i></span>
             <span title="معلمة"><i *ngIf="member.gender == 'معلمة'" class="fa fa-venus" ></i></span>
         </div>
+
         <ul class="list-inline member-icons animate text-center">
             <li class="list-inline-item">
                 <button routerLink='/guests/{{member.username}}' 

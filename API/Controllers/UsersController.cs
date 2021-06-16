@@ -141,7 +141,7 @@ namespace API.Controllers
     {
         //get loggined in user
         var user = await _userManager.GetUserAsync(User);
-
+        
         var result = await _userManager.ChangePasswordAsync(user,  changePassword.PasswordO  ,changePassword.PasswordN);
 
    

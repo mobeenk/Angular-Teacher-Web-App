@@ -96,5 +96,7 @@ export class GuestDetailComponent implements OnInit {
 
   revealNumber() {
     this.isPressed = true
+    //this is to update balance when show number
+    this.accountService.updateUserBalance(this.member.username).subscribe();
   }
 }

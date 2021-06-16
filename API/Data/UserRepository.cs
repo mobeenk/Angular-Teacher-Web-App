@@ -123,10 +123,17 @@ namespace API.Data
         public async Task<AppUser> GetUserByPhotoId(int photoId)
         {
             return await _context.Users
-            .Include(p => p.Photos)
-            .IgnoreQueryFilters()
-            .Where(p => p.Photos.Any(p => p.Id == photoId))
-            .FirstOrDefaultAsync();
+                .Include(p => p.Photos)
+                .IgnoreQueryFilters()
+                .Where(p => p.Photos.Any(p => p.Id == photoId))
+                .FirstOrDefaultAsync();
+        }
+        //Balance
+        public async Task<int> GetUserBalance(string username)
+        {
+            return await _context.Users
+                .Where(x => x.UserName == username)
+                .Select(x => x.Balance).FirstOrDefaultAsync();
         }
     }
 }
