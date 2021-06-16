@@ -12,7 +12,8 @@ section .section-title {
 }
 #footer {
     /* background: #324bda !important; */
-    background-image: linear-gradient(rgb(0, 102, 255), rgb(16, 113, 204), rgb(27, 41, 236));
+    /* background-image: linear-gradient(rgb(0, 102, 255), rgb(16, 113, 204), rgb(27, 41, 236)); */
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
 
 }
 #footer h2{

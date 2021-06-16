@@ -1,12 +1,42 @@
+
+
 <div class="about-section">
-    <h1>About Us Page</h1>
-    <p>Some text about who we are and what we do.</p>
-    <p>Resize the browser window to see that this page is responsive by the way.</p>
+    <h1>عن الموقع</h1><br>
+    <h2>يوفر الموقع خدمة استعراض ملفات المدرسين بغرض التواصل معهم</h2>
+    <h4>يوفر الموقع ملفات الشخصية لمدرسين في تخصصات مختلفة</h4>
+</div>
+
+<br>
+<div dir="rtl" class="about-section text-right">
+  <h1>الأسئلة الشائعة</h1><br>
+  <ol>
+    <div *ngFor= "let q of QA">
+      <li>{{q.question}}</li>
+      <p>{{q.answer}}</p>
+    </div>
+  </ol>
+</div>
+  
+
+<br>
+<div dir="rtl" class="about-section">
+  <h1> للتواصل</h1><br>
+  <div class="text-right">
+    <address>
+      البريد الإلكتروني <a href="mailto:webmaster@example.com">Jon Doe</a>.<br> 
+      Visit us at:<br>
+      الموقع الإلكتروني: Example.com<br>
+      العنوان: Box 564, Disneyland<br>
+      KSA
+      حساب Paypal: isfosejf@embplae.com
+      </address>
   </div>
   
-  <h2 style="text-align:center">Our Team</h2>
+</div>
+  
+  <!-- <h2 style="text-align:center">Our Team</h2> -->
   <div class="row">
-    <div class="column">
+    <!-- <div class="column">
       <div class="card">
         <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Jane" style="width:100%">
         <div class="container">
@@ -17,9 +47,11 @@
           <p><button class="button">Contact</button></p>
         </div>
       </div>
-    </div>
-  
-    <div class="column">
+    </div> -->
+
+    
+  </div>
+    <!-- <div class="column">
       <div class="card">
         <img src="https://randomuser.me/api/portraits/women/20.jpg" alt="Mike" style="width:100%">
         <div class="container">
@@ -43,5 +75,4 @@
           <p><button class="button">Contact</button></p>
         </div>
       </div>
-    </div>
-  </div>
+    </div> -->
