@@ -22,11 +22,17 @@ export class AppComponent implements OnInit {
 
   setCurrentUser() {
     // const user: User = JSON.parse(localStorage.getItem('user'));
-    const user: User = JSON.parse(  this.cookie.getItem('user')    );
-    if (user) {
-      this.accountService.setCurrentUser(user);
-      // this.presence.createHubConnection(user);
+    // console.log( this.cookie.getItem('user'));
+    const cookie =  this.cookie.getItem('user') ;
+    if(cookie){
+      const user: User = JSON.parse(  cookie  );
+      console.log( this.cookie.getItem('user'));
+      if (user) {
+        this.accountService.setCurrentUser(user);
+        this.presence.createHubConnection(user);
+      }
     }
+    
 
   }
 

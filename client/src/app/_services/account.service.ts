@@ -55,7 +55,8 @@ export class AccountService {
     // ********** REMOVE LOCALSTORAGE ****************
   //  localStorage.setItem('user', JSON.stringify(user));
     this.cookie.setItem('user', JSON.stringify(user));
-    console.log(this.cookie.getItem('user'));
+
+    // console.log(this.cookie.getItem('user'));
 
     this.currentUserSource.next(user);
   }

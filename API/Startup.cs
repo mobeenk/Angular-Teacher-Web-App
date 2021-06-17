@@ -37,17 +37,17 @@ namespace API
         {
             services.AddApplicationServices(_config);
             services.AddControllers();
-            // services.AddCors();
-            services.AddCors(o => o.AddPolicy(CorsAllOriginsPolicy, builder =>
-            {
-                builder
-                // .AllowAnyOrigin()
-                .WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    ;
-            }));
+            services.AddCors();
+            // services.AddCors(o => o.AddPolicy(CorsAllOriginsPolicy, builder =>
+            // {
+            //     builder
+            //     // .AllowAnyOrigin()
+            //         .WithOrigins("http://localhost:4200")
+            //         .AllowAnyMethod()
+            //         .AllowAnyHeader()
+            //         .AllowCredentials()
+            //         ;
+            // }));
 
             services.AddIdentityServices(_config);
             services.AddSignalR();
@@ -63,11 +63,11 @@ namespace API
 
             app.UseRouting();
 
-            // app.UseCors(x => x.AllowAnyHeader()
-            //     .AllowAnyMethod()
-            //     .AllowCredentials()
-            //     .WithOrigins("https://localhost:4200"));
-            app.UseCors(CorsAllOriginsPolicy);
+            app.UseCors(x => x.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins("https://localhost:4200"));
+            // app.UseCors(CorsAllOriginsPolicy);
 
             app.UseAuthentication();
             app.UseAuthorization();
