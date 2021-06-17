@@ -26,7 +26,7 @@ namespace API
     public class Startup
     {
         private readonly IConfiguration _config;
-
+        private readonly string CorsAllOriginsPolicy = "_AllowAllPolicy";
         public Startup(IConfiguration config)
         {
             _config = config;
@@ -37,7 +37,14 @@ namespace API
         {
             services.AddApplicationServices(_config);
             services.AddControllers();
-            services.AddCors();
+            // services.AddCors();
+            services.AddCors(o => o.AddPolicy(CorsAllOriginsPolicy, builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            }));
+
             services.AddIdentityServices(_config);
             services.AddSignalR();
             services.AddTransient<IMailService,SendGridMailService>();
@@ -52,10 +59,11 @@ namespace API
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials()
-                .WithOrigins("https://localhost:4401"));
+            // app.UseCors(x => x.AllowAnyHeader()
+            //     .AllowAnyMethod()
+            //     .AllowCredentials()
+            //     .WithOrigins("https://localhost:4401"));
+            app.UseCors(CorsAllOriginsPolicy);
 
             app.UseAuthentication();
             app.UseAuthorization();
