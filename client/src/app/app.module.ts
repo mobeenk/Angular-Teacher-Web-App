@@ -89,7 +89,7 @@ import { RegisterStudentComponent } from './register-student/register-student.co
   ],
   imports: [
     NgbModule,
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

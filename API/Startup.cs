@@ -42,7 +42,9 @@ namespace API
             {
                 builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader();
+                    .AllowAnyHeader()
+                
+                    ;
             }));
 
             services.AddIdentityServices(_config);
@@ -62,13 +64,13 @@ namespace API
             // app.UseCors(x => x.AllowAnyHeader()
             //     .AllowAnyMethod()
             //     .AllowCredentials()
-            //     .WithOrigins("https://localhost:4401"));
+            //     .WithOrigins("https://localhost:4200"));
             app.UseCors(CorsAllOriginsPolicy);
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints( endpoints =>
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<PresenceHub>("hubs/presence");

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { PresenceService } from './presence.service';
 import { resetUser } from '../_models/resetUser';
 import { ToastrService } from 'ngx-toastr';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   
-  constructor(private http: HttpClient, private presence: PresenceService, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private presence: PresenceService, private toastr: ToastrService, private cookie: StorageService) { }
 
   login(model: any) {
     return this.http.post(this.baseUrl + 'account/login', model).pipe(
@@ -51,12 +52,18 @@ export class AccountService {
     const roles = this.getDecodedToken(user.token).role;
     // so we add an array of roles if empty or we push
     Array.isArray(roles) ? user.roles = roles : user.roles.push(roles);
-    localStorage.setItem('user', JSON.stringify(user));
+    // ********** REMOVE LOCALSTORAGE ****************
+  //  localStorage.setItem('user', JSON.stringify(user));
+    this.cookie.setItem('user', JSON.stringify(user));
+    console.log(this.cookie.getItem('user'));
+
     this.currentUserSource.next(user);
   }
 
   logout() {
-    localStorage.removeItem('user');
+     // ********** REMOVE LOCALSTORAGE ****************
+  //  localStorage.removeItem('user');
+   this.cookie.removeItem('user');
     this.currentUserSource.next(null);
     this.presence.stopHubConnection();
   }
