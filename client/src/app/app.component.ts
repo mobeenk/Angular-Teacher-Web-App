@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { User } from './_models/user';
-import { AccountService } from './_services/account.service';
-import { PresenceService } from './_services/presence.service';
+import {Component, OnInit, Inject, PLATFORM_ID, Optional} from '@angular/core';
+import {REQUEST} from '@nguniversal/express-engine/tokens';
+import {isPlatformServer} from '@angular/common';
+import {Request} from 'express';
+import {HttpClient} from '@angular/common/http';
+import {User} from './_models/user';
+import {AccountService} from './_services/account.service';
+import {PresenceService} from './_services/presence.service';
 
 @Component({
   selector: 'app-root',
@@ -12,11 +15,19 @@ import { PresenceService } from './_services/presence.service';
 export class AppComponent implements OnInit {
   title = 'The Dating app';
   users: any;
- 
-  constructor(private accountService: AccountService, private presence: PresenceService) {}
+
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    @Optional() @Inject(REQUEST) private request: Request,
+    private accountService: AccountService,
+    private presence: PresenceService
+  ) {
+  }
 
   ngOnInit() {
-    this.setCurrentUser();
+    if (!isPlatformServer(this.platformId)) {
+      this.setCurrentUser();
+    }
   }
 
   setCurrentUser() {
@@ -27,7 +38,4 @@ export class AppComponent implements OnInit {
     }
 
   }
-
-  
-
 }

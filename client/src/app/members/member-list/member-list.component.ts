@@ -28,7 +28,7 @@ export class MemberListComponent implements OnInit {
   cities: Array<any>;
   majors: Array<string> = SO.majors;
 
-    
+
   constructor(private memberService: MembersService, private sharedService: SharedService, private titleService: Title) {
     this.userParams = this.memberService.getUserParams();
     // this.userParams = new UserParams();
@@ -48,7 +48,7 @@ export class MemberListComponent implements OnInit {
       this.pagination = response.pagination;
     })
     this.addValue();
-   
+
   }
 
   resetFilters() {
@@ -66,7 +66,7 @@ export class MemberListComponent implements OnInit {
 
 
   changeCountry(country) {
-    // 
+    //
     this.cities = this.countryList.find(con => con.name == country).cities;
     this.userParams.city = this.cities[0];
   }
