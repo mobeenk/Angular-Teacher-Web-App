@@ -8,9 +8,8 @@ import { AccountService } from 'src/app/_services/account.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/_models/user';
 
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { GuestParams } from '../../_models/guestParams';
-import * as EventEmitter from 'events';
 import { SharedService } from 'src/app/_services/shared.service';
 import { SO } from 'src/app/_models/staticObjects';
 import { Title } from '@angular/platform-browser';
